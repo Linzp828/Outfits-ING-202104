@@ -1,0 +1,38 @@
+1、类注释
+/**
+ * @version: V1.0
+ * @author: fendo
+ * @className: user
+ * @packageName: user
+ * @description: 这是用户类
+ * @date: 2017-07-28 12:20
+ */
+
+2、构造函数注释
+/**
+* @description: 构造函数
+* @param: [sid, pid]
+*/  
+
+3、方法注释
+/**
+* @author:  fendo
+* @date:2017-07-28 12:20
+* @description: 添加一个用户
+* @param:  xxxx
+* @return: String
+* @throws: 
+*/
+
+4、字段名注释
+public String name;//用户名
+
+5、代码块注释
+/**
+ * 实例化一个用户
+ * xxxxxxx
+ */
+User user=new User();
+
+6、单句注释
+User user=new User();  //实例化一个用户
