@@ -15,7 +15,7 @@ import java.io.Serializable;
 @ToString
 public class Match implements Serializable {
     private int id;
-    private int occasionId;
+    private int occasion_id;
     private String introduce;
-    private int userId;
+    private int user_id;
 }

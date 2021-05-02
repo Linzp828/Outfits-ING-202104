@@ -15,10 +15,10 @@ import java.io.Serializable;
 @ToString
 public class User implements Serializable {
     private int id;
-    private String userAccount;
-    private String userPassword;
-    private String userNickname;
-    private String userSex;
-    private String userPicPath;
-    private String userProfile;
+    private String user_account;
+    private String user_password;
+    private String user_nickname;
+    private String user_sex;
+    private String user_pic_path;
+    private String user_profile;
 }

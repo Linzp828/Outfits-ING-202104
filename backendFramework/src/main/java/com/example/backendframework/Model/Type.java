@@ -15,5 +15,5 @@ import java.io.Serializable;
 @ToString
 public class Type implements Serializable {
     private int id;
-    private String typeName;
+    private String type_name;
 }

@@ -15,9 +15,9 @@ import java.io.Serializable;
 @ToString
 public class Blog implements Serializable {
     private int id;
-    private String blogArticle;
-    private String blogPicPath;
-    private String blogTitle;
-    private String blogReleasedTime;
-    private int userId;
+    private String blog_article;
+    private String blog_pic_path;
+    private String blog_title;
+    private String blog_released_time;
+    private int user_id;
 }

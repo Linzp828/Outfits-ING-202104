@@ -15,6 +15,6 @@ import java.io.Serializable;
 @ToString
 public class SubscribeUser implements Serializable {
     private int id;
-    private int userId;
-    private int subscribeUserId;
+    private int user_id;
+    private int subscribe_user_id;
 }
