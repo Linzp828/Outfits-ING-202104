@@ -13,9 +13,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Accessors(chain = true)
 @ToString
-public class clothing implements Serializable {
+public class Match implements Serializable {
     private int id;
-    private String clothingPic;
+    private int occasionId;
+    private String introduce;
     private int userId;
-    private int subtypeId;
 }

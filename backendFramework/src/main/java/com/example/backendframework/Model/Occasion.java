@@ -13,8 +13,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Accessors(chain = true)
 @ToString
-public class matchClothing implements Serializable {
+public class Occasion implements Serializable {
     private int id;
-    private int clothingId;
-    private int matchId;
+    private String occasionName;
+    private int userId;
 }

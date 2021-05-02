@@ -13,11 +13,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Accessors(chain = true)
 @ToString
-public class blog implements Serializable {
+public class Clothing implements Serializable {
     private int id;
-    private String blogArticle;
-    private String blogPicPath;
-    private String blogTitle;
-    private String blogReleasedTime;
+    private String clothingPic;
     private int userId;
+    private int subtypeId;
 }

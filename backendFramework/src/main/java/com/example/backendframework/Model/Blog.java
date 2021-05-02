@@ -13,9 +13,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Accessors(chain = true)
 @ToString
-public class match implements Serializable {
+public class Blog implements Serializable {
     private int id;
-    private int occasionId;
-    private String introduce;
+    private String blogArticle;
+    private String blogPicPath;
+    private String blogTitle;
+    private String blogReleasedTime;
     private int userId;
 }

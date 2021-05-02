@@ -13,8 +13,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Accessors(chain = true)
 @ToString
-public class collectedBlog implements Serializable {
+public class User implements Serializable {
     private int id;
-    public int userId;
-    public int blogId;
+    private String userAccount;
+    private String userPassword;
+    private String userNickname;
+    private String userSex;
+    private String userPicPath;
+    private String userProfile;
 }

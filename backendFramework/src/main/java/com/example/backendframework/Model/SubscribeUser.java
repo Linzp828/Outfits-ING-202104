@@ -13,10 +13,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Accessors(chain = true)
 @ToString
-public class subtype implements Serializable {
+public class SubscribeUser implements Serializable {
     private int id;
-    private int typeId;
-    private String subtypeName;
-    private int minLevel;
-    private int maxLevel;
+    private int userId;
+    private int subscribeUserId;
 }
