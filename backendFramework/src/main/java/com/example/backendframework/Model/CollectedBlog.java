@@ -15,6 +15,6 @@ import java.io.Serializable;
 @ToString
 public class CollectedBlog implements Serializable {
     private int id;
-    public int userId;
-    public int blogId;
+    public int user_id;
+    public int blog_id;
 }

@@ -15,6 +15,6 @@ import java.io.Serializable;
 @ToString
 public class Occasion implements Serializable {
     private int id;
-    private String occasionName;
-    private int userId;
+    private String occasion_name;
+    private int user_id;
 }

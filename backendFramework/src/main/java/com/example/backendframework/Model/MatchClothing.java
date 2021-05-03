@@ -15,6 +15,6 @@ import java.io.Serializable;
 @ToString
 public class MatchClothing implements Serializable {
     private int id;
-    private int clothingId;
-    private int matchId;
+    private int clothing_id;
+    private int match_id;
 }

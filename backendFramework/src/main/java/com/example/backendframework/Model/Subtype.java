@@ -15,8 +15,8 @@ import java.io.Serializable;
 @ToString
 public class Subtype implements Serializable {
     private int id;
-    private int typeId;
-    private String subtypeName;
-    private int minLevel;
-    private int maxLevel;
+    private int type_id;
+    private String subtype_name;
+    private int min_level;
+    private int max_level;
 }

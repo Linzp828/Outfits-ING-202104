@@ -15,7 +15,7 @@ import java.io.Serializable;
 @ToString
 public class Clothing implements Serializable {
     private int id;
-    private String clothingPic;
-    private int userId;
-    private int subtypeId;
+    private String clothing_pic;
+    private int user_id;
+    private int subtype_id;
 }
