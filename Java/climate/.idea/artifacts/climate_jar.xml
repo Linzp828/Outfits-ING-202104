@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="climate:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/climate_jar</output-path>
+    <root id="archive" name="climate.jar">
+      <element id="module-output" name="climate" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../DesktopFolder/作业/大三下/软工/α/lib_jb51/commons-logging.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../DesktopFolder/作业/大三下/软工/α/lib_jb51/commons-beanutils.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../DesktopFolder/作业/大三下/软工/α/lib_jb51/json-lib-1.1-jdk13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../DesktopFolder/作业/大三下/软工/α/lib_jb51/xom-1.0d10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../DesktopFolder/作业/大三下/软工/α/lib_jb51/ezmorph-1.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../DesktopFolder/作业/大三下/软工/α/lib_jb51/commons-collections-3.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../DesktopFolder/作业/大三下/软工/α/lib_jb51/commons-lang-2.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
