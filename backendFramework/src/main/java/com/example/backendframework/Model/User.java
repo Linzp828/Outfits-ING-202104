@@ -21,4 +21,5 @@ public class User implements Serializable {
     private String user_sex;
     private String user_pic_path;
     private String user_profile;
+    private String user_token;
 }
