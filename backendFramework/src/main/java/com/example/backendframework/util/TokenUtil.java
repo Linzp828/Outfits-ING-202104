@@ -19,7 +19,6 @@ public class TokenUtil {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         System.out.println(now);
-
         //签名算法的秘钥，解析token时的秘钥需要和此时的一样
         byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary("miyao");
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
