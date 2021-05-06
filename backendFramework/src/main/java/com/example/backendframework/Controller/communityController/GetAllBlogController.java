@@ -34,6 +34,12 @@ public class GetAllBlogController {
             for (int j=0;j<blogList.size();j++){
                 Map<String, Object> mapBlog = new HashMap<String, Object>();
                 mapBlog.put("blogId",blogList.get(j).getId());
+                int num = blogDao.userBlogFind(Integer.parseInt(code.get("ID").toString()),blogList.get(j).getId());
+                if(num==0){
+                    mapBlog.put("favorite",0);
+                }else {
+                    mapBlog.put("favorite",1);
+                }
                 mapBlog.put("blogTitle",blogList.get(j).getBlog_title());
                 mapBlog.put("blogPic",blogList.get(j).getBlog_pic_path());
                 mapBlog.put("userId",blogList.get(j).getUser_id());

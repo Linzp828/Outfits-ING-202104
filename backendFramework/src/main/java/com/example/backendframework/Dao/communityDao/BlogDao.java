@@ -1,6 +1,7 @@
 package com.example.backendframework.Dao.communityDao;
 
 import com.example.backendframework.Model.Blog;
+import com.example.backendframework.Model.CollectedBlog;
 import com.example.backendframework.Model.SubscribeUser;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -39,4 +40,15 @@ public interface BlogDao {
 
     @Delete("delete from blog where user_id=#{user_id} and id=#{id}")
     int blogDelete(int  user_id,int id);
+
+    @Select("select * from blog")
+    List<Blog> blogSearch();
+
+    @Select("select * from collected_blog where user_id=#{user_id}")
+    List<CollectedBlog> userFindBlogId(int user_id);
+
+    @Select("select * from blog where id=#{id}")
+    List<Blog> IdFindBlog(int id);
+
+
 }

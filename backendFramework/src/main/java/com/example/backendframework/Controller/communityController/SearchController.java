@@ -34,6 +34,14 @@ public class SearchController {
             List<Blog> blogList1 = blogDao.articleSearch(keyword);
             for (int i=0;i<blogList1.size();i++){
                 Map<String, Object> mapBlog1 = new HashMap<String, Object>();
+
+                int num = blogDao.userBlogFind(Integer.parseInt(code.get("ID").toString()),blogList1.get(i).getId());
+                if(num!=0){
+                    mapBlog1.put("favorite",1);
+                }else{
+                    mapBlog1.put("favorite",0);
+                }
+
                 mapBlog1.put("blogId",blogList1.get(i).getId());
                 mapBlog1.put("blogTitle",blogList1.get(i).getBlog_title());
                 mapBlog1.put("blogPic",blogList1.get(i).getBlog_pic_path());
@@ -45,6 +53,14 @@ public class SearchController {
             List<Blog> blogList2 = blogDao.titleSearch(keyword);
             for (int i=0;i<blogList2.size();i++){
                 Map<String, Object> mapBlog2 = new HashMap<String, Object>();
+
+                int num = blogDao.userBlogFind(Integer.parseInt(code.get("ID").toString()),blogList2.get(i).getId());
+                if(num!=0){
+                    mapBlog2.put("favorite",1);
+                }else{
+                    mapBlog2.put("favorite",0);
+                }
+
                 mapBlog2.put("blogId",blogList2.get(i).getId());
                 mapBlog2.put("blogTitle",blogList2.get(i).getBlog_title());
                 mapBlog2.put("blogPic",blogList2.get(i).getBlog_pic_path());

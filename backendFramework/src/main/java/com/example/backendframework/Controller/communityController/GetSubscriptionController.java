@@ -26,7 +26,7 @@ public class GetSubscriptionController {
     Map<String, Object> map = new HashMap<String, Object>();
 
     @RequestMapping(value = "/getSubscription", method = RequestMethod.POST)
-    public JSON GetSubscription(@RequestBody JSONObject request){
+    public JSON GetSubscription(@RequestBody JSONObject request/*,@RequestHeader("token") String token*/){
         List<Map<String,Object>> listBlog = new ArrayList<>();
         String token = request.getString("token");
         try {
@@ -37,6 +37,14 @@ public class GetSubscriptionController {
                 List<Blog> blogList = blogDao.userFindBlog(subscribeUserList.get(i).getSubscribe_user_id());
                 for (int j=0;j<blogList.size();j++){
                     Map<String, Object> mapBlog = new HashMap<String, Object>();
+
+                    int num = blogDao.userBlogFind(Integer.parseInt(code.get("ID").toString()),blogList.get(j).getId());
+                    if(num!=0){
+                        mapBlog.put("favorite",1);
+                    }else{
+                        mapBlog.put("favorite",0);
+                    }
+
                     mapBlog.put("blogId",blogList.get(j).getId());
                     mapBlog.put("blogTitle",blogList.get(j).getBlog_title());
                     mapBlog.put("blogPic",blogList.get(j).getBlog_pic_path());
