@@ -21,10 +21,10 @@ public class SearchController {
     private BlogDao blogDao;
     Map<String, Object> map = new HashMap<String, Object>();
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public JSON blogSearch(@RequestBody JSONObject request){
+    public JSON blogSearch(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
         List<Map<String,Object>> listBlog = new ArrayList<>();
         List<Map<String,Object>> listBlog1 = new ArrayList<>();
-        String token = request.getString("token");
+        //String token = request.getString("token");
         String keyword = request.getString("keyword");
         try {
             //判断token是否正常

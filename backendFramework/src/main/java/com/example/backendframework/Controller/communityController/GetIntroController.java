@@ -28,11 +28,11 @@ public class GetIntroController {
 
 
     @RequestMapping(value = "/getIntro", method = RequestMethod.POST)
-    public JSON GetIntro(@RequestBody JSONObject request){
+    public JSON GetIntro(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
         List<Map<String,Object>> listBlog = new ArrayList<>();
         //获取数组
         //String[]  blogIdList =request.getParameterValues("blogIdArray");
-        String token = request.getString("token");
+        //String token = request.getString("token");
         String blogIdList = request.getString("blogIdArray");
         JSONArray blogIdArray= JSONArray.parseArray(blogIdList);
         try {

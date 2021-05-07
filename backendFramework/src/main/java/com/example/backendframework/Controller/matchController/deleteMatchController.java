@@ -9,10 +9,7 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +24,8 @@ public class deleteMatchController {
     Map<String, Object> map = new HashMap<String, Object>();
 
     @RequestMapping(value = "/deleteMatch",method = RequestMethod.POST)
-    public JSONObject DeleteMatch(@RequestBody JSONObject obj){
-        String token = obj.getString("token");
+    public JSONObject DeleteMatch(@RequestBody JSONObject obj,@RequestHeader(value = "token") String token){
+        //String token = obj.getString("token");
 //      String newToken = TokenUtil.createJWT("2","ruijin", "15260011385",(long)1000*60*60*24*3);
 //      System.out.println(newToken);
         Map<String, Object> code;

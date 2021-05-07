@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.meDao.ModifyInfoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,7 @@ public class ModifyInfoController {
     private ModifyInfoDao modifyInfoDao;
 
     @RequestMapping("/modifyInfo")
-    public JSONObject modifyIntro(@RequestBody JSONObject request){
+    public JSONObject modifyIntro(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
         int userId = request.getInteger("userId");
         String userNickname = request.getString("userNickname");
         String userSex = request.getString("userSex");

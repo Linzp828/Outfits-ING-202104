@@ -24,8 +24,8 @@ public class GetDetailController {
     Map<String, Object> map = new HashMap<String, Object>();
     Map<String, Object> mapData = new HashMap<String, Object>();
     @RequestMapping(value = "/getDetail", method = RequestMethod.POST)
-    public JSON GetDetail(@RequestBody JSONObject request){
-        String token = request.getString("token");
+    public JSON GetDetail(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
+        //String token = request.getString("token");
 
         try {
             Map<String, Object> code = TokenUtil.parseJWT(token);

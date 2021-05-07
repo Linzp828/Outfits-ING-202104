@@ -8,6 +8,7 @@ import com.example.backendframework.Model.User;
 import com.example.backendframework.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,9 +27,9 @@ public class GetUserController {
     private SubscribeDao subscribeDao;
 
     @RequestMapping("getIntro")
-    public JSONObject getInfo(@RequestBody JSONObject request){
+    public JSONObject getInfo(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
         int checkedUserId = request.getInteger("userId");
-        String token = request.getString("token");
+        //String token = request.getString("token");
         boolean isSubscribed = false;
 
         JSONObject response = new JSONObject();

@@ -22,8 +22,8 @@ public class CollectController {
     Map<String, Object> map = new HashMap<String, Object>();
     //List<Map<String,Object>> listBlog = new ArrayList<>();
     @RequestMapping(value = "/collect", method = RequestMethod.POST)
-    public JSON Collect(@RequestBody JSONObject request){
-        String token = request.getString("token");
+    public JSON Collect(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
+        //String token = request.getString("token");
         int blogId = request.getInteger("blogId");
         try {
             Map<String, Object> code = TokenUtil.parseJWT(token);

@@ -21,7 +21,7 @@ public class UpdateUserIfo {
     private UserDao userDao;
     Map<String, Object> map = new HashMap<String, Object>();
     @RequestMapping(value = "/info/update", method = RequestMethod.POST)
-    public JSON UpdateUserIfo(@RequestBody JSONObject request){
+    public JSON UpdateUserIfo(@RequestBody JSONObject request,@RequestHeader(value = "token") String user_token){
         int id = request.getInteger("id");
         String user_account = request.getString("phone");
         String user_password = " ";
@@ -29,7 +29,7 @@ public class UpdateUserIfo {
         String user_sex = request.getString("sex");
         String user_pic_path = request.getString("pic_path");
         String user_profile = request.getString("profile");
-        String user_token = request.getString("token");
+        //String user_token = request.getString("token");
         User user1 = new User(id,user_account,user_password,user_nickname,user_sex,user_pic_path,user_profile,user_token);
         System.out.println(user1);
         int success = userDao.updateUserIfo(user1);

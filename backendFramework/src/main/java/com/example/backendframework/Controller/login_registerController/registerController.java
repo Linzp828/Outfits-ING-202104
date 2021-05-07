@@ -24,9 +24,9 @@ public class registerController {
     private UserDao userDao;
     //登录验证
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public JSON register(@RequestBody JSONObject request) {
+    public JSON register(@RequestBody JSONObject request,@RequestHeader(value = "token") String token) {
         Map<String, Object> map = new HashMap<String, Object>();
-        String token = request.getString("token");
+        //String token = request.getString("token");
         String vercode = request.getString("vercode");
         String phone = request.getString("phone");
         String password = request.getString("password");

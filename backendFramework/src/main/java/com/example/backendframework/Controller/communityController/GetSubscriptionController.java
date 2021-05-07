@@ -26,9 +26,9 @@ public class GetSubscriptionController {
     Map<String, Object> map = new HashMap<String, Object>();
 
     @RequestMapping(value = "/getSubscription", method = RequestMethod.POST)
-    public JSON GetSubscription(@RequestBody JSONObject request/*,@RequestHeader("token") String token*/){
+    public JSON GetSubscription(@RequestBody JSONObject request,@RequestHeader("token") String token){
         List<Map<String,Object>> listBlog = new ArrayList<>();
-        String token = request.getString("token");
+        //String token = request.getString("token");
         try {
             Map<String, Object> code = TokenUtil.parseJWT(token);
             List<SubscribeUser> subscribeUserList = blogDao.userFindSubscribe(Integer.parseInt(code.get("ID").toString()));

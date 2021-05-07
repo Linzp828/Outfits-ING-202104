@@ -27,10 +27,10 @@ public class LoginController {
     private UserDao userDao;
     //登录验证
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public JSON checkLogin(@RequestBody JSONObject request) {
+    public JSON checkLogin(@RequestBody JSONObject request,@RequestHeader(value = "token") String user_token) {
         String user_account= request.getString("phone");
         String user_password=request.getString("password");
-        String user_token=request.getString("token");
+        //String user_token=request.getString("token");
 
         Map<String, Object> map = new HashMap<String, Object>();
         List<User> userList = userDao.accountFindUser(user_account);

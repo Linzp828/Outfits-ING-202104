@@ -25,9 +25,9 @@ public class GetUserBlogController {
     private BlogDao blogDao;
     Map<String, Object> map = new HashMap<String, Object>();
     @RequestMapping(value = "/getBlog", method = RequestMethod.POST)
-    public JSON GetAllBlog(@RequestBody JSONObject request){
+    public JSON GetAllBlog(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
         List<Map<String,Object>> listBlog = new ArrayList<>();
-        String token = request.getString("token");
+        //String token = request.getString("token");
         try {
             Map<String, Object> code = TokenUtil.parseJWT(token);
             List<Blog> blogList = blogDao.userFindBlog(Integer.parseInt(code.get("ID").toString()));

@@ -27,9 +27,9 @@ public class GetCollectionController {
     Map<String, Object> map = new HashMap<String, Object>();
 
     @RequestMapping(value = "/getCollection", method = RequestMethod.POST)
-    public JSON GetAllBlog(@RequestBody JSONObject request) {
+    public JSON GetAllBlog(@RequestBody JSONObject request,@RequestHeader(value = "token") String token) {
         List<Map<String,Object>> listBlog = new ArrayList<>();
-        String token = request.getString("token");
+        //String token = request.getString("token");
         try {
             Map<String, Object> code = TokenUtil.parseJWT(token);
             List<CollectedBlog> collectedBlogList = blogDao.userFindBlogId(Integer.parseInt(code.get("ID").toString()));

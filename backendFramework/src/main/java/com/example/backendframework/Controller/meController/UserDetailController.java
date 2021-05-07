@@ -6,10 +6,7 @@ import com.example.backendframework.Dao.meDao.GetUserDetailDao;
 import com.example.backendframework.Model.User;
 import com.example.backendframework.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +19,8 @@ public class UserDetailController {
     private GetUserDetailDao getUserDetailDao;
 
     @RequestMapping("/getDetail")
-    public JSONObject modifyIntro(@RequestBody JSONObject request){
-        String token = request.getString("token");
+    public JSONObject modifyIntro(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
+        //String token = request.getString("token");
         Map<String, Object> mapUser = new HashMap<>();
         JSONObject response = new JSONObject();
         try {

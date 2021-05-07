@@ -24,8 +24,8 @@ public class UpdatePasswordController {
     private UserDao userDao;
     Map<String, Object> map = new HashMap<String, Object>();
     @RequestMapping(value = "/info/update/password", method = RequestMethod.POST)
-    public JSON blogSearch(@RequestBody JSONObject request){
-        String token = request.getString("token");
+    public JSON blogSearch(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
+        //String token = request.getString("token");
         String vercode = request.getString("vercode");
         String phone = request.getString("phone");
         String password = request.getString("password");

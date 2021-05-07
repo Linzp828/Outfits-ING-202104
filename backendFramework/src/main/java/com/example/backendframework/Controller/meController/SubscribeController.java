@@ -7,6 +7,7 @@ import com.example.backendframework.Model.User;
 import com.example.backendframework.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,9 +21,9 @@ public class SubscribeController {
     private SubscribeDao subscribeDao;
 
     @RequestMapping("/subscribe")
-    public JSONObject getSubscription(@RequestBody JSONObject request){
+    public JSONObject getSubscription(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
         int subscribeUserId = request.getInteger("userId");
-        String token = request.getString("token");
+        //String token = request.getString("token");
         JSONObject response = new JSONObject();
         boolean isSubscribed = false;
 
