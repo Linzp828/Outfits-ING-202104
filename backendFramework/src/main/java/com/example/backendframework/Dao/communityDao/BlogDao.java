@@ -50,5 +50,8 @@ public interface BlogDao {
     @Select("select * from blog where id=#{id}")
     List<Blog> IdFindBlog(int id);
 
+    @Insert("INSERT INTO blog(blog_article,blog_pic_path,blog_title,blog_released_time,user_id) VALUES"+
+            "(#{article},#{picPath},#{title},#{releaseTime},#{userId})")
+    void postBlog(String article,String picPath,String title,String releaseTime,int userId);
 
 }

@@ -3,11 +3,9 @@ package com.example.backendframework.Controller.meController;
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.meDao.ModifyInfoDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/user")
 public class ModifyInfoController {

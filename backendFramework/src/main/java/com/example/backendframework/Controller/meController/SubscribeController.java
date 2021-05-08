@@ -6,14 +6,12 @@ import com.example.backendframework.Dao.meDao.SubscribeDao;
 import com.example.backendframework.Model.User;
 import com.example.backendframework.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/user")
 public class SubscribeController {

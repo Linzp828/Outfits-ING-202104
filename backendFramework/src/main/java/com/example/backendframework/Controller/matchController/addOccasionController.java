@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/match")
 public class addOccasionController {
