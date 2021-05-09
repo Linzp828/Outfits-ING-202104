@@ -123,6 +123,20 @@ public class LoginController {
             map.put("msg","超时登入失败");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
+        }catch (Exception e3){
+            if (user.getUser_password().equals(Md5password)) {
+                String newToken = TokenUtil.createJWT(String.valueOf(user.getId()),"ruijin",user.getUser_account(),(long)1000*60*60*24*3);
+                userDao.updateToken(user_account,newToken);
+                map.put("token",newToken);
+                map.put("code",200);
+                map.put("msg","登入成功");
+                JSONObject jsonp= new JSONObject(map);
+                return jsonp;
+            }
+            map.put("code",500);
+            map.put("msg","登入失败");
+            JSONObject jsonp= new JSONObject(map);
+            return jsonp;
         }
 
     }
