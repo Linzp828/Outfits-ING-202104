@@ -3,7 +3,9 @@ package com.example.backendframework.Controller.communityController;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.communityDao.BlogDao;
+import com.example.backendframework.Dao.meDao.GetIntroDao;
 import com.example.backendframework.Model.Blog;
+import com.example.backendframework.Model.User;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -22,6 +24,7 @@ import java.util.Map;
 public class GetAllBlogController {
     @Autowired
     private BlogDao blogDao;
+    private GetIntroDao getIntroDao;
     Map<String, Object> map = new HashMap<String, Object>();
 
     @RequestMapping(value = "/getAll", method = RequestMethod.POST)
@@ -42,7 +45,10 @@ public class GetAllBlogController {
                 }
                 mapBlog.put("blogTitle",blogList.get(j).getBlog_title());
                 mapBlog.put("blogPic",blogList.get(j).getBlog_pic_path());
+                User user1=getIntroDao.getIntro(blogList.get(j).getUser_id());
                 mapBlog.put("userId",blogList.get(j).getUser_id());
+                mapBlog.put("user_pic",user1.getUser_pic_path());
+                mapBlog.put("user_nickname",user1.getUser_nickname());
                 listBlog.add(mapBlog);
             }
             map.put("code",200);
