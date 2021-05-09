@@ -2,7 +2,6 @@ package com.example.backendframework.Controller.meController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.meDao.ModifyInfoDao;
-import com.example.backendframework.util.PictureUrlUtil;
 import com.example.backendframework.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
