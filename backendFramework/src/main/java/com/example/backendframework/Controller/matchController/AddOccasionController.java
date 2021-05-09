@@ -17,7 +17,7 @@ import java.util.Map;
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/match")
-public class addOccasionController {
+public class AddOccasionController {
     @Autowired
     private OccasionDao occasionDao;
     Map<String, Object> map = new HashMap<String, Object>();

@@ -3,32 +3,33 @@ package com.example.backendframework.Controller.matchController;
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.matchDao.MatchClothingDao;
 import com.example.backendframework.Dao.matchDao.MatchDao;
+import com.example.backendframework.Dao.wardrobeDao.WardrobeDao;
+import com.example.backendframework.Model.Match;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/match")
-public class deleteMatchController {
+@RequestMapping("match")
+public class ListMatchController {
     @Autowired
     private MatchDao matchDao;
     @Autowired
     private MatchClothingDao matchClothingDao;
+    @Autowired
+    private WardrobeDao wardrobeDao;
     Map<String, Object> map = new HashMap<String, Object>();
 
-    @RequestMapping(value = "/deleteMatch",method = RequestMethod.POST)
-    public JSONObject DeleteMatch(@RequestBody JSONObject obj,@RequestHeader(value = "token") String token){
-        //String token = obj.getString("token");
-//      String newToken = TokenUtil.createJWT("2","ruijin", "15260011385",(long)1000*60*60*24*3);
-//      System.out.println(newToken);
+    @RequestMapping(value = "/listMatch",method = RequestMethod.POST)
+    public JSONObject ListMatch(@RequestBody JSONObject obj,@RequestHeader(value = "token") String token){
         Map<String, Object> code;
         try{
             code = TokenUtil.parseJWT(token);
@@ -51,20 +52,20 @@ public class deleteMatchController {
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }
+
         int userId = Integer.parseInt(code.get("ID").toString());
-        int num1 = matchDao.deleteMatch(obj.getInteger("matchId"));
-        int num2 = matchClothingDao.deleteMatchClothing(obj.getInteger("matchId"));
-        System.out.println("搭配中包含了"+Integer.toString(num2)+"衣物");
-        if(num1 == 1){
-            map.put("code",200);
-            map.put("msg","删除成功");
-            map.put("data","");
-            JSONObject jsonp= new JSONObject(map);
-            return jsonp;
+        List<Map<String,Object>> data=new ArrayList<>();
+        List<Match> matchList= matchDao.listMatch(obj.getInteger("occasionId"));
+        for(Match match:matchList){
+            Map<String,Object> matchMap=new HashMap<String,Object>();
+            matchMap.put("matchId",match.getId());
+            matchMap.put("introduce",match.getIntroduce());
+            matchMap.put("clothingIdArray",matchClothingDao.listClothing(match.getId()));
+            data.add(matchMap);
         }
-        map.put("code",403);
-        map.put("msg","删除失败");
-        map.put("data","");
+        map.put("code",200);
+        map.put("msg","查找成功");
+        map.put("data",data);
         JSONObject jsonp= new JSONObject(map);
         return jsonp;
     }

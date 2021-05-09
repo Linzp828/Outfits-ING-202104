@@ -21,7 +21,7 @@ import java.util.Map;
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/match")
-public class addMatchController {
+public class AddMatchController {
 
     @Autowired
     private MatchDao matchDao;
@@ -30,15 +30,14 @@ public class addMatchController {
     Map<String, Object> map = new HashMap<String, Object>();
 
     @RequestMapping(value = "/addMatch",method = RequestMethod.POST)
-    public JSON AddMatch(@RequestBody JSONObject request){
-        String token = request.getString("token");
+    public JSON AddMatch(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
         String clothingIdList = request.getString("clothingIdArray");
         JSONArray clothingIdArray= JSONArray.parseArray(clothingIdList);
         try {
             Map<String, Object> code = TokenUtil.parseJWT(token);
             int userId = Integer.parseInt(code.get("ID").toString());
 
-            Match match=new Match(request.getInteger("occasionId"),request.getString("introduce"),userId);
+            Match match=new Match(0,request.getInteger("occasionId"),request.getString("introduce"),userId);
             int num = matchDao.insertMatch(match);
             int matchId=match.getId();
             //新建搭配成功

@@ -14,7 +14,6 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.security.SignatureException;
 import java.util.Date;
-import org.apache.commons.codec.binary.Base64;
 
 import static java.lang.Math.*;
 
@@ -27,9 +26,9 @@ import static java.lang.Math.*;
  * @data: 2021-05-02 17:57
  **/
 
-class climateInfo {
+public class ClimateUtil {
 //    天气信息
-    private String TIANQI_DAILY_WEATHER_URL = "https://api.seniverse.com/v3/weather/daily.json";
+    private static String TIANQI_DAILY_WEATHER_URL = "https://api.seniverse.com/v3/weather/daily.json";
 
 //    生活指数
 //    private String TIANQI_DAILY_WEATHER_URL = "https://api.seniverse.com/v3/life/suggestion.json";
@@ -37,9 +36,9 @@ class climateInfo {
 //    详细信息
 //    private String TIANQI_DAILY_WEATHER_URL = "https://api.seniverse.com/v3/pro/weather/grid/daily.json";
 
-    private String TIANQI_API_SECRET_KEY = "SZrzG9EI4E18kBmi5"; //
+    private static String TIANQI_API_SECRET_KEY = "SZrzG9EI4E18kBmi5"; //
 
-    private String TIANQI_API_USER_ID = "PHTfjd8ncw5SppqMH"; //
+    private static String TIANQI_API_USER_ID = "PHTfjd8ncw5SppqMH"; //
 
     /**
      * Generate HmacSHA1 signature with given data string and key
@@ -48,7 +47,7 @@ class climateInfo {
      * @return
      * @throws SignatureException
      */
-    private String generateSignature(String data, String key) throws SignatureException {
+    private static String generateSignature(String data, String key) throws SignatureException {
         String result;
         try {
             // get an hmac_sha1 key from the raw key bytes
@@ -75,13 +74,7 @@ class climateInfo {
      * @param days
      * @return
      */
-    public String generateGetDiaryWeatherURL(
-            String location,
-            String language,
-            String unit,
-            String start,
-            String days
-    )  throws SignatureException, UnsupportedEncodingException {
+    private static String generateGetDiaryWeatherURL(String location,String language,String unit,String start,String days) throws SignatureException, UnsupportedEncodingException {
         String timestamp = String.valueOf(new Date().getTime());
         String params = "ts=" + timestamp + "&ttl=1800&uid=" + TIANQI_API_USER_ID;
         String signature = URLEncoder.encode(generateSignature(params, TIANQI_API_SECRET_KEY), "UTF-8");
@@ -93,7 +86,7 @@ class climateInfo {
      * Generate the URL to get diary weather
      * @return  json
      */
-    public static String loadJson (String url) {
+    private static String loadJson (String url) {
         StringBuilder json = new StringBuilder();
         try {
             URL urlObject = new URL(url);
@@ -117,7 +110,7 @@ class climateInfo {
      * Generate the URL to get diary weather
      * @return  json
      */
-    public static int levelCal(String url) {
+    private static int levelCal(String url) {
         //获取json
         String jsonStr = loadJson(url);
         JSONObject json = JSONObject.parseObject(jsonStr);
@@ -185,21 +178,24 @@ class climateInfo {
         return level;
     }
 
-    public static void main(String args[]){
-        climateInfo demo = new climateInfo();
+    public static int getLevel(){
+        ClimateUtil climateUtil =new ClimateUtil();
+        int level=0;
         try {
-            String url = demo.generateGetDiaryWeatherURL(
+            String url = climateUtil.generateGetDiaryWeatherURL(
                     "fuzhou",
                     "zh-Hans",
                     "c",
                     "1",
                     "1"
             );
-            int level = levelCal(url);
+            level = levelCal(url);
 
             System.out.println("level:" + level);
         } catch (Exception e) {
             System.out.println("Exception:" + e);
+        }finally {
+            return level;
         }
     }
 }
