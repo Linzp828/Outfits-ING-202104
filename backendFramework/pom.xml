@@ -11,6 +11,7 @@
     <groupId>team</groupId>
     <artifactId>BackendFrame</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>BackendFrame</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -104,6 +105,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.4.4</version>
+                <configuration>
+                    <mainClass>com.example.backendframework.BackendframeworkApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -39,7 +39,7 @@ public class registerController {
                 if(code.get("Subject").equals(vercode)){
                     String newToken = TokenUtil.createJWT(code.get("ID").toString(),"ruijin",phone,(long)1000*60*60*24*3);
                     String Md5password = Md5Util.code(password);
-                    User user = new User(Integer.parseInt(code.get("ID").toString()),phone,Md5password,nickname,sex," "," ",newToken);
+                    User user = new User(Integer.parseInt(code.get("ID").toString()),phone,Md5password,nickname,sex,"a"," ",newToken);
                     userDao.insertUser(user);
                     map.put("code",200);
                     map.put("msg","注册成功");

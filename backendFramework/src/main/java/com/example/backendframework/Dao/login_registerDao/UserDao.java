@@ -28,7 +28,7 @@ public interface UserDao {
     @Select("select * from user where user_token=#{user_token}")
     User findToken(String user_token);
 
-    @Insert("insert into user(user_account,user_password,user_nickname,user_sex,user_token) value(#{user_account}, #{user_password}, #{user_nickname}, #{user_sex}, #{user_token})")
+    @Insert("insert into user(user_account,user_password,user_nickname,user_sex,user_pic_path,user_token) value(#{user_account}, #{user_password}, #{user_nickname}, #{user_sex}, #{user_pic_path},#{user_token})")
     int insertUser(User user);
 
     @Select("select count(*) from user where user_account=#{#user_account}")

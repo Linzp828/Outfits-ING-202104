@@ -14,6 +14,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.security.SignatureException;
 import java.util.Date;
+import org.apache.commons.codec.binary.Base64;
 
 import static java.lang.Math.*;
 
