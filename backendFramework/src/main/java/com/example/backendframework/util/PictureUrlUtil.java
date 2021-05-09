@@ -30,7 +30,7 @@ public class PictureUrlUtil {
      * @return
      */
     public static String getFilePath(MultipartFile multipartFile,String fileFolderName){
-        String realfilePath = null;
+        String realfilePath = "";
         try{
             /*File file = new File("");
             String filePath = System.getProperty("java.class.path");
