@@ -2,7 +2,7 @@ package com.example.backendframework.Controller.meController;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.backendframework.Dao.meDao.GetIntroDao;
+import com.example.backendframework.Dao.login_registerDao.UserDao;
 import com.example.backendframework.Model.User;
 import com.example.backendframework.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserDetailController {
     @Autowired
-    private GetIntroDao getIntroDao;
+    private UserDao userDao;
 
     @RequestMapping("/getDetail")
     public JSONObject modifyIntro(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
@@ -25,7 +25,7 @@ public class UserDetailController {
         JSONObject response = new JSONObject();
         try {
             Map<String, Object> code = TokenUtil.parseJWT(token);
-            User userDetail = getIntroDao.getIntro(Integer.parseInt(code.get("ID").toString()));
+            User userDetail = userDao.getIntro(Integer.parseInt(code.get("ID").toString()));
             mapUser.put("userAccount",userDetail.getUser_account());
             mapUser.put("userNickname",userDetail.getUser_nickname());
             mapUser.put("userPic",userDetail.getUser_pic_path());

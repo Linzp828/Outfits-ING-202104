@@ -2,7 +2,7 @@ package com.example.backendframework.Controller.meController;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.backendframework.Dao.meDao.GetIntroDao;
+import com.example.backendframework.Dao.login_registerDao.UserDao;
 import com.example.backendframework.Dao.meDao.SubscribeDao;
 import com.example.backendframework.Model.User;
 import com.example.backendframework.util.TokenUtil;
@@ -18,7 +18,7 @@ import java.util.Map;
 @RequestMapping("/user")
 public class GetUserController {
     @Autowired
-    private GetIntroDao getIntroDao;
+    private UserDao userDao;
 
     @Autowired
     private SubscribeDao subscribeDao;
@@ -34,7 +34,7 @@ public class GetUserController {
         try {
             Map<String, Object> code = TokenUtil.parseJWT(token);
             int userId = Integer.parseInt(code.get("ID").toString());
-            User userInfo =getIntroDao.getIntro(checkedUserId);
+            User userInfo =userDao.getIntro(checkedUserId);
             Map<String, Object> mapUser = new HashMap<>();
             List<User> subscription = subscribeDao.getSubscription(userId);
             for (User user : subscription) {
