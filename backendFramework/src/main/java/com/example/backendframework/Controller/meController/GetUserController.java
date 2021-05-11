@@ -23,6 +23,14 @@ public class GetUserController {
     @Autowired
     private SubscribeDao subscribeDao;
 
+    /**
+     * @author:  林龙星
+     * @date:2021-5-3 12:20
+     * @description: 根据用户id获取用户信息
+     * @param:  userId,token
+     * @return: response
+     */
+
     @RequestMapping("getIntro")
     public JSONObject getInfo(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
         int checkedUserId = request.getInteger("userId");

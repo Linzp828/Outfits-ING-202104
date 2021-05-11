@@ -18,8 +18,16 @@ public class UserDetailController {
     @Autowired
     private UserDao userDao;
 
+
+    /**
+     * @author:  林龙星
+     * @date:2021-5-4 13:20
+     * @description: 根据用户token获取用户的信息
+     * @param:  token
+     * @return: response
+     */
     @RequestMapping("/getDetail")
-    public JSONObject modifyIntro(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
+    public JSONObject modifyIntro(@RequestHeader(value = "token") String token){
         //String token = request.getString("token");
         Map<String, Object> mapUser = new HashMap<>();
         JSONObject response = new JSONObject();
