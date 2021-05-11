@@ -2,8 +2,10 @@ package com.example.backendframework.Controller.communityController;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.backendframework.Dao.login_registerDao.UserDao;
 import com.example.backendframework.Model.Blog;
 import com.example.backendframework.Dao.communityDao.BlogDao;
+import com.example.backendframework.Model.User;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -19,6 +21,9 @@ import java.util.*;
 public class SearchController {
     @Autowired
     private BlogDao blogDao;
+
+    @Autowired
+    private UserDao userDao;
     Map<String, Object> map = new HashMap<String, Object>();
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public JSON blogSearch(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
@@ -42,6 +47,22 @@ public class SearchController {
                     mapBlog1.put("favorite",0);
                 }
 
+                User user1= userDao.getIntro(blogList1.get(i).getUser_id());
+                mapBlog1.put("userId",blogList1.get(i).getUser_id());
+                mapBlog1.put("user_pic",user1.getUser_pic_path());
+                mapBlog1.put("user_nickname",user1.getUser_nickname());
+
+
+                int t1 = userDao.userIdGetSubscribe(Integer.parseInt(code.get("ID").toString()),blogList1.get(i).getUser_id());
+                if(t1==1){
+                    mapBlog1.put("user_state",2);
+                }else if (Integer.parseInt(code.get("ID").toString())==blogList1.get(i).getUser_id()){
+                    mapBlog1.put("user_state",1);
+                }else{
+                    mapBlog1.put("user_state",3);
+                }
+
+                mapBlog1.put("blog_released_time",blogList1.get(i).getBlog_released_time());
                 mapBlog1.put("blogId",blogList1.get(i).getId());
                 mapBlog1.put("blogTitle",blogList1.get(i).getBlog_title());
                 mapBlog1.put("blogPic",blogList1.get(i).getBlog_pic_path());
@@ -61,6 +82,22 @@ public class SearchController {
                     mapBlog2.put("favorite",0);
                 }
 
+                User user1= userDao.getIntro(blogList2.get(i).getUser_id());
+                mapBlog2.put("userId",blogList2.get(i).getUser_id());
+                mapBlog2.put("user_pic",user1.getUser_pic_path());
+                mapBlog2.put("user_nickname",user1.getUser_nickname());
+
+
+                int t1 = userDao.userIdGetSubscribe(Integer.parseInt(code.get("ID").toString()),blogList2.get(i).getUser_id());
+                if(t1==1){
+                    mapBlog2.put("user_state",2);
+                }else if (Integer.parseInt(code.get("ID").toString())==blogList2.get(i).getUser_id()){
+                    mapBlog2.put("user_state",1);
+                }else{
+                    mapBlog2.put("user_state",3);
+                }
+
+                mapBlog2.put("blog_released_time",blogList2.get(i).getBlog_released_time());
                 mapBlog2.put("blogId",blogList2.get(i).getId());
                 mapBlog2.put("blogTitle",blogList2.get(i).getBlog_title());
                 mapBlog2.put("blogPic",blogList2.get(i).getBlog_pic_path());

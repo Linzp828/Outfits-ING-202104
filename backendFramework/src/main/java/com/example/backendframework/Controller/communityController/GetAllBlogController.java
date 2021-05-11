@@ -3,6 +3,7 @@ package com.example.backendframework.Controller.communityController;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.communityDao.BlogDao;
+import com.example.backendframework.Dao.login_registerDao.UserDao;
 import com.example.backendframework.Dao.meDao.GetIntroDao;
 import com.example.backendframework.Model.Blog;
 import com.example.backendframework.Model.User;
@@ -24,7 +25,8 @@ import java.util.Map;
 public class GetAllBlogController {
     @Autowired
     private BlogDao blogDao;
-    private GetIntroDao getIntroDao;
+    @Autowired
+    private UserDao userDao;
     Map<String, Object> map = new HashMap<String, Object>();
 
     @RequestMapping(value = "/getAll", method = RequestMethod.POST)
@@ -32,23 +34,37 @@ public class GetAllBlogController {
         List<Map<String, Object>> listBlog = new ArrayList<>();
         //String token = request.getString("token");
         try {
+
             Map<String, Object> code = TokenUtil.parseJWT(token);
             List<Blog> blogList = blogDao.blogSearch();
             for (int j=0;j<blogList.size();j++){
                 Map<String, Object> mapBlog = new HashMap<String, Object>();
                 mapBlog.put("blogId",blogList.get(j).getId());
                 int num = blogDao.userBlogFind(Integer.parseInt(code.get("ID").toString()),blogList.get(j).getId());
-                if(num==0){
-                    mapBlog.put("favorite",0);
-                }else {
+                if(num==1){
                     mapBlog.put("favorite",1);
+                }else {
+                    mapBlog.put("favorite",0);
                 }
                 mapBlog.put("blogTitle",blogList.get(j).getBlog_title());
                 mapBlog.put("blogPic",blogList.get(j).getBlog_pic_path());
-                User user1=getIntroDao.getIntro(blogList.get(j).getUser_id());
+                mapBlog.put("blog_released_time",blogList.get(j).getBlog_released_time());
+                //System.out.println(mapBlog);
+                //System.out.println("人的id"+blogList.get(j).getUser_id());
+                User user1= userDao.getIntro(blogList.get(j).getUser_id());
                 mapBlog.put("userId",blogList.get(j).getUser_id());
                 mapBlog.put("user_pic",user1.getUser_pic_path());
                 mapBlog.put("user_nickname",user1.getUser_nickname());
+
+
+                int t1 = userDao.userIdGetSubscribe(Integer.parseInt(code.get("ID").toString()),blogList.get(j).getUser_id());
+                if(t1==1){
+                    mapBlog.put("user_state",2);
+                }else if (Integer.parseInt(code.get("ID").toString())==blogList.get(j).getUser_id()){
+                    mapBlog.put("user_state",1);
+                }else{
+                    mapBlog.put("user_state",3);
+                }
                 listBlog.add(mapBlog);
             }
             map.put("code",200);
