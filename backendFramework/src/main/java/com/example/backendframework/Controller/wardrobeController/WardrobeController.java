@@ -10,9 +10,15 @@ import com.example.backendframework.Model.Type;
 import com.example.backendframework.util.PictureUrlUtil;
 import com.example.backendframework.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.List;
 
 @CrossOrigin(origins="*")
@@ -22,9 +28,8 @@ public class WardrobeController {
     @Autowired
     private WardrobeDao wardrobeDao;
 
-    static final String clothingPath = "clothingPic";
-    static final String serverIP = "http://121.5.100.116";
-
+    static final String clothingPath = "static/clothingPic";
+    static final String server = "121.5.100.116/static/clothingPic/";
 
     /**
      * 获取某类别下的衣物
@@ -56,7 +61,7 @@ public class WardrobeController {
                 JSONObject clothingObject = new JSONObject();
                 Clothing clothing = clothingList.get(j);
                 clothingObject.put("clothingId",clothing.getId());
-                clothingObject.put("clothingPic",serverIP+clothing.getClothing_pic());
+                clothingObject.put("clothingPic",server+clothing.getClothing_pic());
                 clothingArray.add(clothingObject);
             }
             subtypeObject.put("clothing",clothingArray);
@@ -83,7 +88,7 @@ public class WardrobeController {
 
             for(int i = 0;i < files.length;i++){
                 PictureUrlUtil.writePicture(files[i],clothingPath);     //将图片输出到clothingPic文件夹
-                String filePath = PictureUrlUtil.getFilePath(files[i],clothingPath);
+                String filePath = PictureUrlUtil.getFilePath(files[i]);
                 int subtypeId = subtypeIdArray.getInteger(i);
                 System.out.println(filePath+"  "+userId+"  "+subtypeId);
                 wardrobeDao.importPic(filePath,userId,subtypeId);

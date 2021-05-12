@@ -16,7 +16,7 @@ public class UploadPicController {
     @Autowired
     private ModifyInfoDao modifyInfoDao;
 
-    static final String headPath = "headPic";
+    static final String headPath = "static/headPic";
     static final String serverIP = "http://121.5.100.116";
 
 
@@ -34,7 +34,7 @@ public class UploadPicController {
         try {
             int userId = Integer.parseInt(TokenUtil.parseJWT(token).get("ID").toString());
             PictureUrlUtil.writePicture(image,headPath);
-            String headPicPath = PictureUrlUtil.getFilePath(image,headPath);
+            String headPicPath = PictureUrlUtil.getFilePath(image);
 
             modifyInfoDao.setHeadPic(userId,headPicPath);
             response.put("code",200);

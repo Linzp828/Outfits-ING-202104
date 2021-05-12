@@ -18,7 +18,7 @@ public class PostBlogController {
     @Autowired
     private BlogDao blogDao;
 
-    static final String blogPath = "blogPic";
+    static final String blogPath = "static/blogPic";
 
     @RequestMapping(value = "/post",method = RequestMethod.POST)
     public JSONObject postBlog(@RequestHeader("token") String token,
@@ -26,7 +26,7 @@ public class PostBlogController {
                                @RequestParam("blogTitle") String blogTitle,
                                @RequestParam("blogPic") MultipartFile file){
         int userId = Integer.parseInt(TokenUtil.parseJWT(token).get("ID").toString());     //将token解析为userId
-        String blogPicPath = PictureUrlUtil.getFilePath(file,blogPath);
+        String blogPicPath = PictureUrlUtil.getFilePath(file);
         PictureUrlUtil.writePicture(file,blogPath);
 
         SimpleDateFormat sdf = new SimpleDateFormat();

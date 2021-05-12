@@ -26,10 +26,9 @@ public class PictureUrlUtil {
     /**
      * 获取图片本地路径
      * @param multipartFile   图片
-     * @param fileFolderName     文件夹名称
      * @return
      */
-    public static String getFilePath(MultipartFile multipartFile,String fileFolderName){
+    public static String getFilePath(MultipartFile multipartFile){
         String realfilePath = "";
         try{
             /*File file = new File("");
@@ -38,13 +37,7 @@ public class PictureUrlUtil {
             for(;i >= 0;i--){
                 if(filePath.charAt(i) == '\\' || filePath.charAt(i) == '/')
                     break;
-            }
-            realfilePath = filePath.substring(0,i);*/
-            realfilePath += "/";
-            realfilePath += "outfits";
-            realfilePath += "/";
-            realfilePath += fileFolderName;
-            realfilePath += "/";
+            }*/
             realfilePath += multipartFile.getOriginalFilename();
         }
         catch (Exception e){
