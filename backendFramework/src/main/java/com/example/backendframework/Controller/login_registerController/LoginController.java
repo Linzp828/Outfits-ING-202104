@@ -36,8 +36,8 @@ public class LoginController {
         List<User> userList = userDao.accountFindUser(user_account);
         if(userList.size()==0){
             map.put("code",500);
-            map.put("msg","登入失败");
-            map.put("data","账号错误");
+            map.put("msg","登入失败，账号错误");
+            map.put("data","");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }
@@ -54,13 +54,13 @@ public class LoginController {
             userDao.updateToken(user_account,newToken);
             map.put("code",200);
             map.put("msg","登入成功");
-            map.put("token",newToken);
+            map.put("data",newToken);
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }else if (code.get("code").equals("success")){
              map.put("code",200);
              map.put("msg","登入成功");
-             map.put("token",user_token);
+             map.put("data",user_token);
              JSONObject jsonp= new JSONObject(map);
              return jsonp;
         }else{                    //不正确的话就要判断密码咯
@@ -68,7 +68,7 @@ public class LoginController {
             if (user.getUser_password().equals(Md5password)) {
                 String newToken = TokenUtil.createJWT(String.valueOf(user.getId()),"ruijin",user.getUser_account(),(long)1000*60*60*24*3);
                 userDao.updateToken(user_account,newToken);
-                map.put("token",newToken);
+                map.put("data",newToken);
                 map.put("code",200);
                 map.put("msg","登入成功");
                 JSONObject jsonp= new JSONObject(map);
@@ -77,6 +77,7 @@ public class LoginController {
         }
         map.put("code",500);
         map.put("msg","登入失败");
+        map.put("data"," ");
         JSONObject jsonp= new JSONObject(map);
         return jsonp;
 
@@ -84,7 +85,7 @@ public class LoginController {
             if (user.getUser_password().equals(Md5password)) {
                 String newToken = TokenUtil.createJWT(String.valueOf(user.getId()),"ruijin",user.getUser_account(),(long)1000*60*60*24*3);
                 userDao.updateToken(user_account,newToken);
-                map.put("token",newToken);
+                map.put("data",newToken);
                 map.put("code",200);
                 map.put("msg","登入成功");
                 JSONObject jsonp= new JSONObject(map);
@@ -92,14 +93,15 @@ public class LoginController {
             }
             map.put("code",500);
             map.put("msg","登入失败");
-            map.put("data",Md5password);
+            map.put("data"," ");
+            //map.put("data",Md5password);
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }catch (SignatureException e1){
             if (user.getUser_password().equals(Md5password)) {
                 String newToken = TokenUtil.createJWT(String.valueOf(user.getId()),"ruijin",user.getUser_account(),(long)1000*60*60*24*3);
                 userDao.updateToken(user_account,newToken);
-                map.put("token",newToken);
+                map.put("data",newToken);
                 map.put("code",200);
                 map.put("msg","标签登入成功");
                 JSONObject jsonp= new JSONObject(map);
@@ -107,13 +109,14 @@ public class LoginController {
             }
             map.put("code",500);
             map.put("msg","标签登入失败");
+            map.put("data"," ");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }catch (ExpiredJwtException e2){
             if (user.getUser_password().equals(Md5password)) {
                 String newToken = TokenUtil.createJWT(String.valueOf(user.getId()),"ruijin",user.getUser_account(),(long)1000*60*60*24*3);
                 userDao.updateToken(user_account,newToken);
-                map.put("token",newToken);
+                map.put("data",newToken);
                 map.put("code",200);
                 map.put("msg","超时登入成功");
                 JSONObject jsonp= new JSONObject(map);
@@ -121,13 +124,14 @@ public class LoginController {
             }
             map.put("code",500);
             map.put("msg","超时登入失败");
+            map.put("data"," ");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }catch (Exception e3){
             if (user.getUser_password().equals(Md5password)) {
                 String newToken = TokenUtil.createJWT(String.valueOf(user.getId()),"ruijin",user.getUser_account(),(long)1000*60*60*24*3);
                 userDao.updateToken(user_account,newToken);
-                map.put("token",newToken);
+                map.put("data",newToken);
                 map.put("code",200);
                 map.put("msg","登入成功");
                 JSONObject jsonp= new JSONObject(map);
@@ -135,6 +139,7 @@ public class LoginController {
             }
             map.put("code",500);
             map.put("msg","登入失败");
+            map.put("data"," ");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }
