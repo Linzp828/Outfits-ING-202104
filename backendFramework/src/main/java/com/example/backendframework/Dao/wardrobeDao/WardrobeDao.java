@@ -34,4 +34,9 @@ public interface WardrobeDao {
     @Insert("INSERT INTO clothing(clothing_pic,user_id,subtype_id) VALUES(#{clothingPic},#{userId},#{subtypeId})")
     void importPic(String clothingPic,int userId,int subtypeId);
 
+    @Select("SELECT * FROM clothing INNER JOIN subtype on clothing.subtype_id=subtype.id WHERE user_id=#{userId} AND #{level}>=subtype.min_level AND #{level}<=subtype.max_level")
+    List<Clothing> listLevelClothing(int userId,int level);
+
+    @Select("select type_id from subtype where id=#{subtype_id}")
+    int getTypeId(int subtype_id);
 }

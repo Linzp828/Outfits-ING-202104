@@ -61,7 +61,7 @@ public class DeleteOccasionController {
         }
 
         //删除场合
-        int num2 = occasionDao.deleteOccasion(obj.getInteger("occasionId"));
+        int num2 = occasionDao.deleteOccasion(userId,obj.getString("occasionName"));
 //        System.out.println("删除场合"+Integer.toString(num2));
 
         if(num2>0){

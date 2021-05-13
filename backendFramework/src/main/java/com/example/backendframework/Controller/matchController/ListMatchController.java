@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.matchDao.MatchClothingDao;
 import com.example.backendframework.Dao.matchDao.MatchDao;
 import com.example.backendframework.Dao.wardrobeDao.WardrobeDao;
+import com.example.backendframework.Model.Clothing;
 import com.example.backendframework.Model.Match;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -26,6 +27,7 @@ public class ListMatchController {
     private MatchClothingDao matchClothingDao;
     @Autowired
     private WardrobeDao wardrobeDao;
+    static final String server = "121.5.100.116/static/clothingPic/";
     Map<String, Object> map = new HashMap<String, Object>();
 
     @RequestMapping(value = "/listMatch",method = RequestMethod.POST)
@@ -60,7 +62,16 @@ public class ListMatchController {
             Map<String,Object> matchMap=new HashMap<String,Object>();
             matchMap.put("matchId",match.getId());
             matchMap.put("introduce",match.getIntroduce());
-            matchMap.put("clothingIdArray",matchClothingDao.listClothing(match.getId()));
+
+            List<Clothing> clothingList=matchClothingDao.listClothing(match.getId());
+            List<Map<String,Object>> clothingArray=new ArrayList<>();
+            for(Clothing clothing:clothingList){
+                Map<String,Object> clothingMap=new HashMap<String,Object>();
+                clothingMap.put("clothingId",clothing.getId());
+                clothingMap.put("clothingPic",server+clothing.getClothing_pic());
+                clothingArray.add(clothingMap);
+            }
+            matchMap.put("clothingArray",clothingArray);
             data.add(matchMap);
         }
         map.put("code",200);

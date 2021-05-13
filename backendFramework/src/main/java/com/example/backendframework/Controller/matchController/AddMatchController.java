@@ -37,17 +37,19 @@ public class AddMatchController {
             Map<String, Object> code = TokenUtil.parseJWT(token);
             int userId = Integer.parseInt(code.get("ID").toString());
 
-            Match match=new Match(0,request.getInteger("occasionId"),request.getString("introduce"),userId);
+            Match match=new Match(-1,request.getInteger("occasionId"),request.getString("introduce"),userId);
             int num = matchDao.insertMatch(match);
             int matchId=match.getId();
             //新建搭配成功
+            System.out.println("衣物id数组大小："+clothingIdArray.size());
             if(num == 1 && matchId != -1){
+                System.out.println("进入match——clothing关系建立");
                 for(int i=0;i<clothingIdArray.size();i++){
                     //忽略
-                    int flag = matchClothingDao.insertMatchClothing(Integer.parseInt(clothingIdArray.get(i).toString()),matchId);
-                    if(flag!=1){
-                        System.out.println("新增搭配-插入失败");
-                    }
+                    int clothingId=Integer.parseInt(clothingIdArray.get(i).toString());
+                    System.out.println(clothingId+"  "+matchId);
+                    matchClothingDao.insertMatchClothing(clothingId,matchId);
+                    System.out.println("新增搭配-插入成功");
                 }
             }
 
