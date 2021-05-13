@@ -71,7 +71,7 @@ public class ListMatchController {
                 clothingMap.put("clothingPic",server+clothing.getClothing_pic());
                 clothingArray.add(clothingMap);
             }
-            matchMap.put("clothingArray",clothingArray);
+            matchMap.put("clothing",clothingArray);
             data.add(matchMap);
         }
         map.put("code",200);
