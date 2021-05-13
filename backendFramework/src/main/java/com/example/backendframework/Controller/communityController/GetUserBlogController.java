@@ -24,6 +24,9 @@ public class GetUserBlogController {
     @Autowired
     private BlogDao blogDao;
     Map<String, Object> map = new HashMap<String, Object>();
+
+    static final String serverBlog = "http://121.5.100.116/static/blogPic/";
+
     @RequestMapping(value = "/getBlog", method = RequestMethod.POST)
     public JSON GetAllBlog(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
         List<Map<String,Object>> listBlog = new ArrayList<>();
@@ -36,7 +39,7 @@ public class GetUserBlogController {
                 Map<String, Object> mapBlog = new HashMap<String, Object>();
                 mapBlog.put("blogId",blogList.get(i).getId());
                 mapBlog.put("blogTitle",blogList.get(i).getBlog_title());
-                mapBlog.put("blogPic",blogList.get(i).getBlog_pic_path());
+                mapBlog.put("blogPic",serverBlog+blogList.get(i).getBlog_pic_path());
                 mapBlog.put("userId",blogList.get(i).getUser_id());
                 listBlog.add(mapBlog);
             }

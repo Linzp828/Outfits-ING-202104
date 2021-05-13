@@ -31,6 +31,9 @@ public class GetCollectionController {
     private UserDao userDao;
     Map<String, Object> map = new HashMap<String, Object>();
 
+    static final String serverBlog = "http://121.5.100.116/static/blogPic/";
+    static final String serverHead = "http://121.5.100.116/static/headPic/";
+
     @RequestMapping(value = "/getCollection", method = RequestMethod.POST)
     public JSON GetAllBlog(@RequestBody JSONObject request,@RequestHeader(value = "token") String token) {
         List<Map<String,Object>> listBlog = new ArrayList<>();
@@ -45,13 +48,13 @@ public class GetCollectionController {
                     Map<String, Object> mapBlog = new HashMap<String, Object>();
                     mapBlog.put("blogId",blogList.get(j).getId());
                     mapBlog.put("blogTitle",blogList.get(j).getBlog_title());
-                    mapBlog.put("blogPic",blogList.get(j).getBlog_pic_path());
+                    mapBlog.put("blogPic",serverBlog+blogList.get(j).getBlog_pic_path());
                     mapBlog.put("userId",blogList.get(j).getUser_id());
                     mapBlog.put("blog_released_time",blogList.get(j).getBlog_released_time());
 
                     User user1= userDao.getIntro(blogList.get(j).getUser_id());
                     mapBlog.put("userId",blogList.get(j).getUser_id());
-                    mapBlog.put("user_pic",user1.getUser_pic_path());
+                    mapBlog.put("user_pic",serverHead+user1.getUser_pic_path());
                     mapBlog.put("user_nickname",user1.getUser_nickname());
 
 

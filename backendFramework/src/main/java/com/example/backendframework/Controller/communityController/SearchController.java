@@ -24,7 +24,11 @@ public class SearchController {
 
     @Autowired
     private UserDao userDao;
+
     Map<String, Object> map = new HashMap<String, Object>();
+    static final String serverBlog = "http://121.5.100.116/static/blogPic/";
+    static final String serverHead = "http://121.5.100.116/static/headPic/";
+
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public JSON blogSearch(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
         List<Map<String,Object>> listBlog = new ArrayList<>();
@@ -49,7 +53,7 @@ public class SearchController {
 
                 User user1= userDao.getIntro(blogList1.get(i).getUser_id());
                 mapBlog1.put("userId",blogList1.get(i).getUser_id());
-                mapBlog1.put("user_pic",user1.getUser_pic_path());
+                mapBlog1.put("user_pic",serverHead+user1.getUser_pic_path());
                 mapBlog1.put("user_nickname",user1.getUser_nickname());
 
 
@@ -65,7 +69,7 @@ public class SearchController {
                 mapBlog1.put("blog_released_time",blogList1.get(i).getBlog_released_time());
                 mapBlog1.put("blogId",blogList1.get(i).getId());
                 mapBlog1.put("blogTitle",blogList1.get(i).getBlog_title());
-                mapBlog1.put("blogPic",blogList1.get(i).getBlog_pic_path());
+                mapBlog1.put("blogPic",serverBlog+blogList1.get(i).getBlog_pic_path());
                 mapBlog1.put("userId",blogList1.get(i).getUser_id());
                 listBlog.add(mapBlog1);
             }
@@ -84,7 +88,7 @@ public class SearchController {
 
                 User user1= userDao.getIntro(blogList2.get(i).getUser_id());
                 mapBlog2.put("userId",blogList2.get(i).getUser_id());
-                mapBlog2.put("user_pic",user1.getUser_pic_path());
+                mapBlog2.put("user_pic",serverHead+user1.getUser_pic_path());
                 mapBlog2.put("user_nickname",user1.getUser_nickname());
 
 
@@ -100,7 +104,7 @@ public class SearchController {
                 mapBlog2.put("blog_released_time",blogList2.get(i).getBlog_released_time());
                 mapBlog2.put("blogId",blogList2.get(i).getId());
                 mapBlog2.put("blogTitle",blogList2.get(i).getBlog_title());
-                mapBlog2.put("blogPic",blogList2.get(i).getBlog_pic_path());
+                mapBlog2.put("blogPic",serverBlog+blogList2.get(i).getBlog_pic_path());
                 mapBlog2.put("userId",blogList2.get(i).getUser_id());
                 listBlog.add(mapBlog2);
             }

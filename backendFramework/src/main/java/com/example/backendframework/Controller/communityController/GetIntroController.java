@@ -26,6 +26,7 @@ public class GetIntroController {
     private BlogDao blogDao;
     Map<String, Object> map = new HashMap<String, Object>();
 
+    static final String serverBlog = "http://121.5.100.116/static/blogPic/";
 
     @RequestMapping(value = "/getIntro", method = RequestMethod.POST)
     public JSON GetIntro(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
@@ -52,7 +53,7 @@ public class GetIntroController {
                 }
                 mapBlog.put("blogId",list.get(0).getId());
                 mapBlog.put("blogTitle",list.get(0).getBlog_title());
-                mapBlog.put("blogPic",list.get(0).getBlog_pic_path());
+                mapBlog.put("blogPic",serverBlog+list.get(0).getBlog_pic_path());
                 mapBlog.put("userId",list.get(0).getUser_id());
                 listBlog.add(mapBlog);
             }

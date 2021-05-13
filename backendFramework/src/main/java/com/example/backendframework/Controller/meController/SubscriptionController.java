@@ -20,6 +20,8 @@ public class SubscriptionController {
     @Autowired
     private SubscribeDao subscribeDao;
 
+    static final String server = "http://121.5.100.116/static/headPic/";
+
 
     /**
      * @author:  林龙星
@@ -42,7 +44,7 @@ public class SubscriptionController {
                 Map<String, Object> mapUser = new HashMap<>();
                 mapUser.put("userId",user.getId());
                 mapUser.put("userNickname", user.getUser_nickname());
-                mapUser.put("userPic", user.getUser_pic_path());
+                mapUser.put("userPic", server+user.getUser_pic_path());
                 mapUser.put("userSex", user.getUser_sex());
                 mapUser.put("userProfile", user.getUser_profile());
                 listUser.add(mapUser);

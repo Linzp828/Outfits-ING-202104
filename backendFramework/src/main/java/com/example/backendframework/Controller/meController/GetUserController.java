@@ -23,6 +23,8 @@ public class GetUserController {
     @Autowired
     private SubscribeDao subscribeDao;
 
+    static final String server = "http://121.5.100.116/static/headPic/";
+
     /**
      * @author:  林龙星
      * @date:2021-5-3 12:20
@@ -59,7 +61,7 @@ public class GetUserController {
                 mapUser.put("userState",0);
             }
             mapUser.put("userNickname", userInfo.getUser_nickname());
-            mapUser.put("userPic", userInfo.getUser_pic_path());
+            mapUser.put("userPic", server+userInfo.getUser_pic_path());
             mapUser.put("userSex", userInfo.getUser_sex());
             mapUser.put("userProfile", userInfo.getUser_profile());
             response.put("data",mapUser);

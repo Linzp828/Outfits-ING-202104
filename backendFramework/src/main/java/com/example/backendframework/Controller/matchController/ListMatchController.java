@@ -27,7 +27,7 @@ public class ListMatchController {
     private MatchClothingDao matchClothingDao;
     @Autowired
     private WardrobeDao wardrobeDao;
-    static final String server = "121.5.100.116/static/clothingPic/";
+    static final String server = "http://121.5.100.116/static/clothingPic/";
     Map<String, Object> map = new HashMap<String, Object>();
 
     @RequestMapping(value = "/listMatch",method = RequestMethod.POST)

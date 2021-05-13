@@ -18,7 +18,6 @@ public class UploadPicController {
 
     static final String headPath = "static/headPic";
 
-
     /**
      * @author:  林龙星
      * @date:2021-5-9 15:20

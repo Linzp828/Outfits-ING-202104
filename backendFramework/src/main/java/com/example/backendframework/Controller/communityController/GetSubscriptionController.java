@@ -30,6 +30,10 @@ public class GetSubscriptionController {
     private UserDao userDao;
     Map<String, Object> map = new HashMap<String, Object>();
 
+    static final String serverBlog = "http://121.5.100.116/static/blogPic/";
+    static final String serverHead = "http://121.5.100.116/static/headPic/";
+
+
     @RequestMapping(value = "/getSubscription", method = RequestMethod.POST)
     public JSON GetSubscription(@RequestBody JSONObject request,@RequestHeader("token") String token){
         List<Map<String,Object>> listBlog = new ArrayList<>();
@@ -51,7 +55,7 @@ public class GetSubscriptionController {
                     }
 
                     User user1= userDao.getIntro(blogList.get(j).getUser_id());
-                    mapBlog.put("user_pic",user1.getUser_pic_path());
+                    mapBlog.put("user_pic",serverHead+user1.getUser_pic_path());
                     mapBlog.put("user_nickname",user1.getUser_nickname());
 
 
@@ -67,7 +71,7 @@ public class GetSubscriptionController {
                     mapBlog.put("blog_released_time",blogList.get(j).getBlog_released_time());
                     mapBlog.put("blogId",blogList.get(j).getId());
                     mapBlog.put("blogTitle",blogList.get(j).getBlog_title());
-                    mapBlog.put("blogPic",blogList.get(j).getBlog_pic_path());
+                    mapBlog.put("blogPic",serverBlog+blogList.get(j).getBlog_pic_path());
                     mapBlog.put("userId",blogList.get(j).getUser_id());
                     listBlog.add(mapBlog);
                 }

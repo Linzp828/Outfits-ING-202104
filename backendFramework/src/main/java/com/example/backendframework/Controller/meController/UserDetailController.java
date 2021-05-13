@@ -18,6 +18,7 @@ public class UserDetailController {
     @Autowired
     private UserDao userDao;
 
+    static final String server = "http://121.5.100.116/static/headPic/";
 
     /**
      * @author:  林龙星
@@ -37,7 +38,7 @@ public class UserDetailController {
             mapUser.put("userId",userDetail.getId());
             mapUser.put("userAccount",userDetail.getUser_account());
             mapUser.put("userNickname",userDetail.getUser_nickname());
-            mapUser.put("userPic",userDetail.getUser_pic_path());
+            mapUser.put("userPic",server+userDetail.getUser_pic_path());
             mapUser.put("userSex",userDetail.getUser_sex());
             mapUser.put("userProfile",userDetail.getUser_profile());
             response.put("code",200);
