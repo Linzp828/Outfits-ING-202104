@@ -20,10 +20,11 @@ import java.io.InputStreamReader;
  * @data: 2021-05-10 22:14
  **/
 public class MattingUtil {
-    public static void main(String[] args) {
+    public static void getImage(String imgUrl) {
         Process proc;
         try {
-            String[] args1 = new String[] {"python","E:\\DesktopFolder\\作业\\大三下\\软工\\α\\matting1.0\\test2\\main.py","E:\\GitHub Desktop\\Outfits-ING-202104\\backendFramework\\src\\main\\img\\2.jpg"};
+            String pyAddr = "E:\\DesktopFolder\\作业\\大三下\\软工\\α\\matting1.0\\test2\\main.py";
+            String[] args1 = new String[] {"python",pyAddr,imgUrl};
             proc = Runtime.getRuntime().exec(args1);
             //用输入输出流来截取结果
             BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
