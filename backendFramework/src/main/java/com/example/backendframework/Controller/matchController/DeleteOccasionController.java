@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.matchDao.MatchClothingDao;
 import com.example.backendframework.Dao.matchDao.MatchDao;
 import com.example.backendframework.Dao.matchDao.OccasionDao;
+import com.example.backendframework.Model.Occasion;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -49,7 +50,8 @@ public class DeleteOccasionController {
             return jsonp;
         }
         int userId = Integer.parseInt(code.get("ID").toString());
-        int num1 = matchDao.existOccasion(obj.getInteger("occasionId"));
+        Occasion occasion= occasionDao.getOccasion(obj.getInteger("occasionId"));
+        int num1 = matchDao.existOccasion(occasion.getId());
 //        System.out.println("存在场合"+Integer.toString(num1));
         //该场合下有搭配，不让删除
         if(num1==1){
@@ -61,7 +63,7 @@ public class DeleteOccasionController {
         }
 
         //删除场合
-        int num2 = occasionDao.deleteOccasion(userId,obj.getString("occasionName"));
+        int num2 = occasionDao.deleteOccasion(occasion.getId());
 //        System.out.println("删除场合"+Integer.toString(num2));
 
         if(num2>0){
