@@ -28,9 +28,10 @@ public class GetUserBlogController {
     public JSON GetAllBlog(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
         List<Map<String,Object>> listBlog = new ArrayList<>();
         //String token = request.getString("token");
+        int userId = request.getInteger("userId");
         try {
             Map<String, Object> code = TokenUtil.parseJWT(token);
-            List<Blog> blogList = blogDao.userFindBlog(Integer.parseInt(code.get("ID").toString()));
+            List<Blog> blogList = blogDao.userFindBlog(userId);
             for (int i=0;i<blogList.size();i++){
                 Map<String, Object> mapBlog = new HashMap<String, Object>();
                 mapBlog.put("blogId",blogList.get(i).getId());
