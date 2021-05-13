@@ -15,12 +15,12 @@ public interface OccasionDao {
     @Insert("insert into occasion(occasion_name,user_id) value(#{occasion_name},#{user_id})")
     int insertOccasion(String occasion_name,int user_id);
 
-    @Delete("delete from occasion where user_id=#{user_id} and occasion_id=#{occasion_id}")
+    @Delete("delete from occasion where id=#{occasion_id}")
     int deleteOccasion(int occasion_id);
 
     @Update("update occasion set occasion_name=#{occasion_name} where id=#{occasion_id}")
     int updateOccasion(String occasion_name,int occasion_id);
 
-    @Select("select * from occasion where occasion_id=#{occasion_id}")
+    @Select("select * from occasion where id=#{occasion_id}")
     Occasion getOccasion(int occasion_id);
 }
