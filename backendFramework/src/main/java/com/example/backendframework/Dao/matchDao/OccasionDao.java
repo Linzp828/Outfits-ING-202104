@@ -20,4 +20,7 @@ public interface OccasionDao {
 
     @Update("update occasion set occasion_name=#{occasion_name} where id=#{occasion_id}")
     int updateOccasion(String occasion_name,int occasion_id);
+
+    @Select("select * from occasion where user_id=#{user_id} and occasion_name=#{occasion_name}")
+    Occasion getOccasion(int user_id,String occasion_name);
 }
