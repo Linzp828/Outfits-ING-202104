@@ -29,7 +29,7 @@ public class WardrobeController {
     private WardrobeDao wardrobeDao;
 
     static final String clothingPath = "static/clothingPic";
-    static final String server = "121.5.100.116/static/clothingPic/";
+    static final String server = "http://121.5.100.116/static/clothingPic/";
 
     /**
      * 获取某类别下的衣物

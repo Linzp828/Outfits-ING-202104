@@ -17,7 +17,6 @@ public class UploadPicController {
     private ModifyInfoDao modifyInfoDao;
 
     static final String headPath = "static/headPic";
-    static final String serverIP = "http://121.5.100.116";
 
 
     /**

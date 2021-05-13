@@ -23,7 +23,7 @@ public class matting {
     public static void getImage(String imgUrl) {
         Process proc;
         try {
-            String pyAddr = "E:\\DesktopFolder\\作业\\大三下\\软工\\α\\matting1.0\\test2\\main.py";
+            String pyAddr = "/outfits/main.py";
             String[] args1 = new String[] {"python",pyAddr,imgUrl};
             proc = Runtime.getRuntime().exec(args1);
             //用输入输出流来截取结果
