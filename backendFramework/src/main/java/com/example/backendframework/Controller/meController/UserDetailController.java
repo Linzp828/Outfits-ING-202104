@@ -34,6 +34,7 @@ public class UserDetailController {
         try {
             Map<String, Object> code = TokenUtil.parseJWT(token);
             User userDetail = userDao.getIntro(Integer.parseInt(code.get("ID").toString()));
+            mapUser.put("userId",userDetail.getId());
             mapUser.put("userAccount",userDetail.getUser_account());
             mapUser.put("userNickname",userDetail.getUser_nickname());
             mapUser.put("userPic",userDetail.getUser_pic_path());
