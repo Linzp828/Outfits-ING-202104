@@ -3,7 +3,10 @@ package com.example.backendframework.Dao.matchDao;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @Mapper
@@ -14,4 +17,6 @@ public interface MatchClothingDao {
     @Delete("delete from match_clothing where match_id=#{match_id}")
     int deleteMatchClothing(int match_id);
 
+    @Select("select clothing_id from match_clothing where match_id=#{match_id} ")
+    List<Integer> listClothing(int match_id);
 }

@@ -31,7 +31,7 @@ public interface UserDao {
     @Insert("insert into user(user_account,user_password,user_nickname,user_sex,user_pic_path,user_token) value(#{user_account}, #{user_password}, #{user_nickname}, #{user_sex}, #{user_pic_path},#{user_token})")
     int insertUser(User user);
 
-    @Select("select count(*) from user where user_account=#{#user_account}")
+    @Select("select count(*) from user where user_account=#{user_account}")
     int phoneFind(String user_account);
 
     @Select("select * from user order by id desc limit 1")
@@ -40,6 +40,12 @@ public interface UserDao {
     @Update("update user set user_password=#{user_password} where id=#{id}")
     void updatePassword(String user_password,int id);
 
-    @Select("select * from user where user_account=#{#user_account}")
+    @Select("select * from user where user_account=#{user_account}")
     User accountFind(String user_account);
+
+    @Select("select * from user where id=#{id}")
+    User getIntro(int id);
+
+    @Select("select count(*) from subscribe_user where user_id=#{user_id} and subscribe_user_id=#{subscribe_user_id}")
+    int userIdGetSubscribe(int user_id,int subscribe_user_id);
 }

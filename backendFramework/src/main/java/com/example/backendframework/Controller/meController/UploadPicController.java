@@ -16,16 +16,25 @@ public class UploadPicController {
     @Autowired
     private ModifyInfoDao modifyInfoDao;
 
-    static final String headPath = "headPic";
+    static final String headPath = "static/headPic";
+    static final String serverIP = "http://121.5.100.116";
 
+
+    /**
+     * @author:  林龙星
+     * @date:2021-5-9 15:20
+     * @description: 获取用户上传的头像图片
+     * @param:  image,token
+     * @return: response
+     */
     @RequestMapping(value = "/uploadPic", method = RequestMethod.POST)
     public JSONObject getSubscription(@RequestParam("avatar") MultipartFile image, @RequestHeader(value = "token") String token){
         JSONObject response = new JSONObject();
 
         try {
             int userId = Integer.parseInt(TokenUtil.parseJWT(token).get("ID").toString());
-            String headPicPath = PictureUrlUtil.getFilePath(image,headPath);
             PictureUrlUtil.writePicture(image,headPath);
+            String headPicPath = PictureUrlUtil.getFilePath(image);
 
             modifyInfoDao.setHeadPic(userId,headPicPath);
             response.put("code",200);

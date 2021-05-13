@@ -2,8 +2,10 @@ package com.example.backendframework.Controller.communityController;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.backendframework.Dao.login_registerDao.UserDao;
 import com.example.backendframework.Model.Blog;
 import com.example.backendframework.Dao.communityDao.BlogDao;
+import com.example.backendframework.Model.User;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -21,6 +23,8 @@ import java.util.Map;
 public class GetDetailController {
     @Autowired
     private BlogDao blogDao;
+    @Autowired
+    private UserDao userDao;
     Map<String, Object> map = new HashMap<String, Object>();
     Map<String, Object> mapData = new HashMap<String, Object>();
     @RequestMapping(value = "/getDetail", method = RequestMethod.POST)
@@ -34,12 +38,25 @@ public class GetDetailController {
             List<Blog> list=blogDao.blogIdFindBlog(blogId);
 
             int num = blogDao.userBlogFind(Integer.parseInt(code.get("ID").toString()),blogId);
-            if (num==0){
-                mapData.put("favorite",0);
-            }else{
+            if (num==1){
                 mapData.put("favorite",1);
+            }else{
+                mapData.put("favorite",0);
             }
+            User user1= userDao.getIntro(list.get(0).getUser_id());
+            mapData.put("userId",list.get(0).getUser_id());
+            mapData.put("user_pic",user1.getUser_pic_path());
+            mapData.put("user_nickname",user1.getUser_nickname());
 
+
+            int t1 = userDao.userIdGetSubscribe(Integer.parseInt(code.get("ID").toString()),list.get(0).getUser_id());
+            if(t1==1){
+                mapData.put("user_state",2);
+            }else if (Integer.parseInt(code.get("ID").toString())==list.get(0).getUser_id()){
+                mapData.put("user_state",1);
+            }else{
+                mapData.put("user_state",3);
+            }
             mapData.put("blogId",blogId);
             mapData.put("title",list.get(0).getBlog_title());
             mapData.put("article",list.get(0).getBlog_article());

@@ -2,9 +2,11 @@ package com.example.backendframework.Controller.communityController;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.backendframework.Dao.login_registerDao.UserDao;
 import com.example.backendframework.Model.Blog;
 import com.example.backendframework.Model.SubscribeUser;
 import com.example.backendframework.Dao.communityDao.BlogDao;
+import com.example.backendframework.Model.User;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -23,6 +25,9 @@ import java.util.Map;
 public class GetSubscriptionController {
     @Autowired
     private BlogDao blogDao;
+
+    @Autowired
+    private UserDao userDao;
     Map<String, Object> map = new HashMap<String, Object>();
 
     @RequestMapping(value = "/getSubscription", method = RequestMethod.POST)
@@ -45,6 +50,21 @@ public class GetSubscriptionController {
                         mapBlog.put("favorite",0);
                     }
 
+                    User user1= userDao.getIntro(blogList.get(j).getUser_id());
+                    mapBlog.put("user_pic",user1.getUser_pic_path());
+                    mapBlog.put("user_nickname",user1.getUser_nickname());
+
+
+                    int t1 = userDao.userIdGetSubscribe(Integer.parseInt(code.get("ID").toString()),blogList.get(j).getUser_id());
+                    if(t1==1){
+                        mapBlog.put("user_state",2);
+                    }else if (Integer.parseInt(code.get("ID").toString())==blogList.get(j).getUser_id()){
+                        mapBlog.put("user_state",1);
+                    }else{
+                        mapBlog.put("user_state",3);
+                    }
+
+                    mapBlog.put("blog_released_time",blogList.get(j).getBlog_released_time());
                     mapBlog.put("blogId",blogList.get(j).getId());
                     mapBlog.put("blogTitle",blogList.get(j).getBlog_title());
                     mapBlog.put("blogPic",blogList.get(j).getBlog_pic_path());

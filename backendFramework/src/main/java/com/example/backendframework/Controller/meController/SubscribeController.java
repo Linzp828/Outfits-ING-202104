@@ -18,6 +18,14 @@ public class SubscribeController {
     @Autowired
     private SubscribeDao subscribeDao;
 
+
+    /**
+     * @author:  林龙星
+     * @date:2021-5-4 13:20
+     * @description: 关注用户
+     * @param:  request,token
+     * @return: response
+     */
     @RequestMapping("/subscribe")
     public JSONObject getSubscription(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
         int subscribeUserId = request.getInteger("userId");
