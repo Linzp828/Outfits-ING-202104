@@ -36,9 +36,9 @@ public class ClimateUtil {
 //    详细信息
 //    private String TIANQI_DAILY_WEATHER_URL = "https://api.seniverse.com/v3/pro/weather/grid/daily.json";
 
-    private String TIANQI_API_SECRET_KEY = "Svlng2cUFynmssBrm"; //私钥
+    private static String TIANQI_API_SECRET_KEY = "Svlng2cUFynmssBrm"; //私钥
 
-    private String TIANQI_API_USER_ID = "PBn6pLH0yUnNSoEP9"; //公钥
+    private static String TIANQI_API_USER_ID = "PBn6pLH0yUnNSoEP9"; //公钥
 
     /**
      * Generate HmacSHA1 signature with given data string and key

@@ -19,7 +19,7 @@ import java.io.InputStreamReader;
  * @description:
  * @data: 2021-05-10 22:14
  **/
-public class matting {
+public class MattingUtil {
     public static void main(String[] args) {
         Process proc;
         try {
