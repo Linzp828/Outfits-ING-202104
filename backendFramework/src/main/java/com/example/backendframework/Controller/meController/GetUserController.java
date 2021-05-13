@@ -58,7 +58,7 @@ public class GetUserController {
             if(userId == checkedUserId){
                 mapUser.put("userState",0);
             }
-
+            mapUser.put("userId",userInfo.getId());
             mapUser.put("userNickname", userInfo.getUser_nickname());
             mapUser.put("userPic", userInfo.getUser_pic_path());
             mapUser.put("userSex", userInfo.getUser_sex());
