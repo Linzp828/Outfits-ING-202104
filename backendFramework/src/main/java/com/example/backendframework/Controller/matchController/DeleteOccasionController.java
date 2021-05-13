@@ -50,7 +50,7 @@ public class DeleteOccasionController {
             return jsonp;
         }
         int userId = Integer.parseInt(code.get("ID").toString());
-        Occasion occasion= occasionDao.getOccasion(userId,obj.getString("occasionName"));
+        Occasion occasion= occasionDao.getOccasion(obj.getInteger("occasionId"));
         int num1 = matchDao.existOccasion(occasion.getId());
 //        System.out.println("存在场合"+Integer.toString(num1));
         //该场合下有搭配，不让删除
@@ -63,7 +63,7 @@ public class DeleteOccasionController {
         }
 
         //删除场合
-        int num2 = occasionDao.deleteOccasion(userId,occasion.getOccasion_name());
+        int num2 = occasionDao.deleteOccasion(occasion.getId());
 //        System.out.println("删除场合"+Integer.toString(num2));
 
         if(num2>0){
