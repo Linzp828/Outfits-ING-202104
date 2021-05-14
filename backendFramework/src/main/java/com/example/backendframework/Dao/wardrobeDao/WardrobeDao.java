@@ -39,4 +39,10 @@ public interface WardrobeDao {
 
     @Select("select type_id from subtype where id=#{subtype_id}")
     int getTypeId(int subtype_id);
+
+    @Select("select type_name from type where id=#{type_id}")
+    String getTypeName(int type_id);
+
+    @Select("select subtype_name from subtype where id=#{subtype_id}")
+    String getSubtypeName(int subtype_id);
 }

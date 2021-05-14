@@ -56,7 +56,7 @@ public class RecommandController {
         List<Map<String,Object>> data=new ArrayList<>();
 
         //根据用户反馈和天气接口的穿衣等级，筛选出符合的衣物类别
-//      List<Clothing> clothingList= wardrobeDao.listLevelClothing(userId,ClimateUtil.getLevel()+offset);
+//        List<Clothing> clothingList= wardrobeDao.listLevelClothing(userId,ClimateUtil.getLevel()+offset);
         List<Clothing> clothingList= wardrobeDao.listLevelClothing(userId,3);
         Boolean upFlag,downFlag;
         Map<String,Object> upMap=new HashMap<String,Object>();
@@ -65,23 +65,27 @@ public class RecommandController {
         upFlag=downFlag=false;
         for(Clothing clothing:clothingList){
             //挑选完毕
-            int type= wardrobeDao.getTypeId(clothing.getSubtype_id());
-            System.out.println(clothing.getId()+ " "+type);
+            int typeId= wardrobeDao.getTypeId(clothing.getSubtype_id());
+            String subtypeName=wardrobeDao.getSubtypeName(clothing.getSubtype_id());
+//            System.out.println(clothing.getId()+ " "+subtypeId);
             if(upFlag && downFlag){
                 break;
             }
             //挑选一件上装
-            if(!upFlag && type==1){
+            if(!upFlag && typeId==1){
                 upMap.put("clothingId",clothing.getId());
                 upMap.put("clothingPic",server+clothing.getClothing_pic());
+                upMap.put("subtypeName",subtypeName);
+                upMap.put("typeName",wardrobeDao.getTypeName(typeId));
                 data.add(upMap);
-                System.out.println();
                 upFlag=true;
             }
             //挑选一件下装
-            if(!downFlag && type==2){
+            if(!downFlag && typeId==2){
                 downMap.put("clothingId",clothing.getId());
                 downMap.put("clothingPic",server+clothing.getClothing_pic());
+                downMap.put("subtypeName",subtypeName);
+                downMap.put("typeName",wardrobeDao.getTypeName(typeId));
                 data.add(downMap);
                 downFlag=true;
             }
