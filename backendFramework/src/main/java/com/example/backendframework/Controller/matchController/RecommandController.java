@@ -24,7 +24,7 @@ public class RecommandController {
     @Autowired
     private WardrobeDao wardrobeDao;
     Map<String, Object> map = new HashMap<String, Object>();
-    static final String server = "121.5.100.116/static/clothingPic/";
+    static final String server = "http://121.5.100.116/static/clothingPic/";
 
     @RequestMapping(value = "/recommand", method = RequestMethod.POST)
     public JSONObject RecommandMatch(@RequestBody JSONObject obj, @RequestHeader(value = "token") String token) {
