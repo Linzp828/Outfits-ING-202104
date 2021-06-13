@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Model.User;
 import com.example.backendframework.Dao.login_registerDao.UserDao;
 import com.example.backendframework.util.Md5Util;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -35,7 +36,7 @@ public class LoginController {
         Map<String, Object> map = new HashMap<String, Object>();
         List<User> userList = userDao.accountFindUser(user_account);
         if(userList.size()==0){
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","登入失败，账号错误");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);
@@ -52,13 +53,13 @@ public class LoginController {
         if(code.get("code").equals("update")){
             String newToken = TokenUtil.createJWT(code.get("ID").toString(),code.get("Issuer").toString(),code.get("Subject").toString(),(long)1000*60*60*24*3);
             userDao.updateToken(user_account,newToken);
-            map.put("code",200);
+            map.put("code",StateUtil.SC_OK);
             map.put("msg","登入成功");
             map.put("data",newToken);
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }else if (code.get("code").equals("success")){
-             map.put("code",200);
+             map.put("code",StateUtil.SC_OK);
              map.put("msg","登入成功");
              map.put("data",user_token);
              JSONObject jsonp= new JSONObject(map);
@@ -69,13 +70,13 @@ public class LoginController {
                 String newToken = TokenUtil.createJWT(String.valueOf(user.getId()),"ruijin",user.getUser_account(),(long)1000*60*60*24*3);
                 userDao.updateToken(user_account,newToken);
                 map.put("data",newToken);
-                map.put("code",200);
+                map.put("code",StateUtil.SC_OK);
                 map.put("msg","登入成功");
                 JSONObject jsonp= new JSONObject(map);
                 return jsonp;
             }
         }
-        map.put("code",500);
+        map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
         map.put("msg","登入失败");
         map.put("data"," ");
         JSONObject jsonp= new JSONObject(map);
@@ -86,12 +87,12 @@ public class LoginController {
                 String newToken = TokenUtil.createJWT(String.valueOf(user.getId()),"ruijin",user.getUser_account(),(long)1000*60*60*24*3);
                 userDao.updateToken(user_account,newToken);
                 map.put("data",newToken);
-                map.put("code",200);
+                map.put("code",StateUtil.SC_OK);
                 map.put("msg","登入成功");
                 JSONObject jsonp= new JSONObject(map);
                 return jsonp;
             }
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","登入失败");
             map.put("data"," ");
             //map.put("data",Md5password);
@@ -102,12 +103,12 @@ public class LoginController {
                 String newToken = TokenUtil.createJWT(String.valueOf(user.getId()),"ruijin",user.getUser_account(),(long)1000*60*60*24*3);
                 userDao.updateToken(user_account,newToken);
                 map.put("data",newToken);
-                map.put("code",200);
+                map.put("code",StateUtil.SC_OK);
                 map.put("msg","标签登入成功");
                 JSONObject jsonp= new JSONObject(map);
                 return jsonp;
             }
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","标签登入失败");
             map.put("data"," ");
             JSONObject jsonp= new JSONObject(map);
@@ -117,12 +118,12 @@ public class LoginController {
                 String newToken = TokenUtil.createJWT(String.valueOf(user.getId()),"ruijin",user.getUser_account(),(long)1000*60*60*24*3);
                 userDao.updateToken(user_account,newToken);
                 map.put("data",newToken);
-                map.put("code",200);
+                map.put("code",StateUtil.SC_OK);
                 map.put("msg","超时登入成功");
                 JSONObject jsonp= new JSONObject(map);
                 return jsonp;
             }
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","超时登入失败");
             map.put("data"," ");
             JSONObject jsonp= new JSONObject(map);
@@ -132,12 +133,12 @@ public class LoginController {
                 String newToken = TokenUtil.createJWT(String.valueOf(user.getId()),"ruijin",user.getUser_account(),(long)1000*60*60*24*3);
                 userDao.updateToken(user_account,newToken);
                 map.put("data",newToken);
-                map.put("code",200);
+                map.put("code",StateUtil.SC_OK);
                 map.put("msg","登入成功");
                 JSONObject jsonp= new JSONObject(map);
                 return jsonp;
             }
-            map.put("code",500);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","登入失败");
             map.put("data"," ");
             JSONObject jsonp= new JSONObject(map);
