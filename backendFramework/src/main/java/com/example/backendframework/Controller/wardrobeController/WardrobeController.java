@@ -8,6 +8,7 @@ import com.example.backendframework.Model.MatchClothing;
 import com.example.backendframework.Model.Subtype;
 import com.example.backendframework.Model.Type;
 import com.example.backendframework.util.PictureUrlUtil;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -99,7 +100,7 @@ public class WardrobeController {
         }
 
         JSONObject response = new JSONObject();
-        response.put("code",200);
+        response.put("code", StateUtil.SC_OK);
         response.put("msg","操作成功");
         response.put("data",null);
         return response;
@@ -136,7 +137,7 @@ public class WardrobeController {
         }
 
         JSONObject response = new JSONObject();
-        response.put("code",200);
+        response.put("code",StateUtil.SC_OK);
         response.put("msg","操作成功");
         response.put("data",typeArray);
         return response;
@@ -153,7 +154,7 @@ public class WardrobeController {
         int subtypeId = request.getInteger("subtypeId");
         wardrobeDao.modifyClothing(clothingId,subtypeId);
         JSONObject response = new JSONObject();
-        response.put("code",200);
+        response.put("code",StateUtil.SC_OK);
         response.put("msg","操作成功");
         response.put("data",null);
         return response;
@@ -172,11 +173,11 @@ public class WardrobeController {
         List<MatchClothing> matchClothingList = wardrobeDao.getMatchClothing(clothingId);
         if(matchClothingList.isEmpty()){
             wardrobeDao.deleteClothing(clothingId);
-            response.put("code",200);
+            response.put("code",StateUtil.SC_OK);
             response.put("msg","删除成功");
         }
         else{
-            response.put("code",200);
+            response.put("code",StateUtil.SC_OK);
             response.put("msg","衣物被搭配引用，删除失败");
         }
 

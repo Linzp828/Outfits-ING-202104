@@ -7,6 +7,7 @@ import com.example.backendframework.Dao.matchDao.MatchClothingDao;
 import com.example.backendframework.Dao.matchDao.MatchDao;
 import com.example.backendframework.Model.Blog;
 import com.example.backendframework.Model.Match;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -53,16 +54,16 @@ public class AddMatchController {
                 }
             }
 
-            map.put("code",200);
+            map.put("code",StateUtil.SC_OK);
             map.put("msg","操作成功");
         }catch (ExpiredJwtException e) {
-            map.put("code",500);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误1");
         } catch (SignatureException e1) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误2");
         } catch (MalformedJwtException e2) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误3");
         }finally {
             map.put("data","");

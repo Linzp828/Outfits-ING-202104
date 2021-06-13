@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.matchDao.MatchClothingDao;
 import com.example.backendframework.Dao.matchDao.MatchDao;
 import com.example.backendframework.Dao.matchDao.OccasionDao;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -29,19 +30,19 @@ public class AddOccasionController {
         try{
             code = TokenUtil.parseJWT(token);
         }catch(ExpiredJwtException e) {
-            map.put("code",500);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误1");
             map.put("data", "");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }catch (SignatureException e1) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误2");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }catch (MalformedJwtException e2) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误3");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);
@@ -51,13 +52,13 @@ public class AddOccasionController {
         int num = occasionDao.insertOccasion(obj.getString("occasionName"),userId);
 
         if(num == 1){
-            map.put("code",200);
+            map.put("code",StateUtil.SC_OK);
             map.put("msg","添加成功");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }
-        map.put("code",400);
+        map.put("code",StateUtil.SC_BAD_REQUEST);
         map.put("msg","添加失败");
         map.put("data","");
         JSONObject jsonp= new JSONObject(map);
