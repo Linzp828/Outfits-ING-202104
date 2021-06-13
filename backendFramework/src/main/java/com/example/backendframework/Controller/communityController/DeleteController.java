@@ -3,6 +3,7 @@ package com.example.backendframework.Controller.communityController;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.communityDao.BlogDao;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -29,32 +30,32 @@ public class DeleteController {
             Map<String, Object> code = TokenUtil.parseJWT(token);
             int num = blogDao.blogDelete(Integer.parseInt(code.get("ID").toString()),blogId);
             if(num == 1){
-                map.put("code",200);
+                map.put("code",StateUtil.SC_OK);
                 map.put("msg","删除成功");
                 map.put("data","");
                 JSONObject jsonp= new JSONObject(map);
                 return jsonp;
             }
-            map.put("code",300);
+            map.put("code",StateUtil.SC_MULTIPLE_CHOICES);
             map.put("msg","删除失败");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
 
         }catch (ExpiredJwtException e) {
-            map.put("code",500);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误1");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         } catch (SignatureException e1) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误2");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         } catch (MalformedJwtException e2) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误3");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);

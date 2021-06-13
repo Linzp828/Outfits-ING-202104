@@ -3,6 +3,7 @@ package com.example.backendframework.Controller.communityController;
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.communityDao.BlogDao;
 import com.example.backendframework.util.PictureUrlUtil;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class PostBlogController {
 
         blogDao.postBlog(blogArticle,blogPicPath,blogTitle,releasedTime,userId);
         JSONObject response = new JSONObject();
-        response.put("code",200);
+        response.put("code", StateUtil.SC_OK);
         response.put("msg","操作成功");
         response.put("data",null);
         return response;

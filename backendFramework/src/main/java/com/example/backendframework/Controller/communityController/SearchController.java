@@ -6,6 +6,7 @@ import com.example.backendframework.Dao.login_registerDao.UserDao;
 import com.example.backendframework.Model.Blog;
 import com.example.backendframework.Dao.communityDao.BlogDao;
 import com.example.backendframework.Model.User;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -119,25 +120,25 @@ public class SearchController {
             //System.out.println(listBlog1);
             //System.out.println(listBlog);
 
-            map.put("code",200);
+            map.put("code",StateUtil.SC_OK);
             map.put("msg","操作成功");
             map.put("data",listBlog1);
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }catch (ExpiredJwtException e) {
-            map.put("code",500);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误1");
             map.put("data",listBlog1);
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         } catch (SignatureException e1) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误2");
             map.put("data",listBlog1);
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         } catch (MalformedJwtException e2) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误3");
             map.put("data",listBlog1);
             JSONObject jsonp= new JSONObject(map);
