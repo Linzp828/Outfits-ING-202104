@@ -53,7 +53,7 @@ public class DeleteOccasionController {
         int userId = Integer.parseInt(code.get("ID").toString());
         Occasion occasion= occasionDao.getOccasion(obj.getInteger("occasionId"));
         int num1 = matchDao.existOccasion(occasion.getId());
-//        System.out.println("存在场合"+Integer.toString(num1));
+//      System.out.println("存在场合"+Integer.toString(num1));
         //该场合下有搭配，不让删除
         if(num1==1){
             map.put("code",StateUtil.SC_FORBIDDEN);
@@ -65,7 +65,7 @@ public class DeleteOccasionController {
 
         //删除场合
         int num2 = occasionDao.deleteOccasion(occasion.getId());
-//        System.out.println("删除场合"+Integer.toString(num2));
+//      System.out.println("删除场合"+Integer.toString(num2));
 
         if(num2>0){
             map.put("code",StateUtil.SC_OK);
