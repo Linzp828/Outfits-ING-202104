@@ -27,6 +27,12 @@ public class LoginController {
     @Autowired
     private UserDao userDao;
     //登录验证
+    /**
+     * 登录操作
+     * @param request
+     * @param user_token
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public JSON checkLogin(@RequestBody JSONObject request,@RequestHeader(value = "token") String user_token) {
         String user_account= request.getString("phone");

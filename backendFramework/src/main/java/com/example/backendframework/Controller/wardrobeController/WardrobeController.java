@@ -43,7 +43,7 @@ public class WardrobeController {
         JSONArray subtypeArray = new JSONArray();
         int typeId = request.getInteger("typeId");
 
-        response.put("code",200);
+        response.put("code",StateUtil.SC_OK);
         response.put("msg","操作成功");
         List<Subtype> subtypeList = wardrobeDao.getSubtype(typeId);
 
