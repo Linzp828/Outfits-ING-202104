@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/blog")
 public class CollectController {
@@ -22,46 +22,54 @@ public class CollectController {
     private BlogDao blogDao;
     Map<String, Object> map = new HashMap<String, Object>();
     //List<Map<String,Object>> listBlog = new ArrayList<>();
+
+    /**
+     * 收藏博客
+     *
+     * @param request
+     * @param token
+     * @return
+     */
     @RequestMapping(value = "/collect", method = RequestMethod.POST)
-    public JSON Collect(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
+    public JSON Collect(@RequestBody JSONObject request, @RequestHeader(value = "token") String token) {
         //String token = request.getString("token");
         int blogId = request.getInteger("blogId");
         try {
             Map<String, Object> code = TokenUtil.parseJWT(token);
-            int num = blogDao.userBlogFind(Integer.parseInt(code.get("ID").toString()),blogId);
-            if(num==1){
-                blogDao.userBlogDelete(Integer.parseInt(code.get("ID").toString()),blogId);
+            int num = blogDao.userBlogFind(Integer.parseInt(code.get("ID").toString()), blogId);
+            if (num == 1) {
+                blogDao.userBlogDelete(Integer.parseInt(code.get("ID").toString()), blogId);
                 map.put("code", StateUtil.SC_OK);
-                map.put("msg","删除成功");
-                map.put("data","");
-                JSONObject jsonp= new JSONObject(map);
+                map.put("msg", "删除成功");
+                map.put("data", "");
+                JSONObject jsonp = new JSONObject(map);
                 return jsonp;
-            }else {
-                blogDao.userBlogInsert(Integer.parseInt(code.get("ID").toString()),blogId);
-                map.put("code",StateUtil.SC_OK);
-                map.put("msg","收藏成功");
-                map.put("data","");
-                JSONObject jsonp= new JSONObject(map);
+            } else {
+                blogDao.userBlogInsert(Integer.parseInt(code.get("ID").toString()), blogId);
+                map.put("code", StateUtil.SC_OK);
+                map.put("msg", "收藏成功");
+                map.put("data", "");
+                JSONObject jsonp = new JSONObject(map);
                 return jsonp;
             }
 
-        }catch (ExpiredJwtException e) {
-            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
-            map.put("msg","token错误1");
-            map.put("data","");
-            JSONObject jsonp= new JSONObject(map);
+        } catch (ExpiredJwtException e) {
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
+            map.put("msg", "token错误1");
+            map.put("data", "");
+            JSONObject jsonp = new JSONObject(map);
             return jsonp;
         } catch (SignatureException e1) {
-            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
-            map.put("msg","token错误2");
-            map.put("data","");
-            JSONObject jsonp= new JSONObject(map);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
+            map.put("msg", "token错误2");
+            map.put("data", "");
+            JSONObject jsonp = new JSONObject(map);
             return jsonp;
         } catch (MalformedJwtException e2) {
-            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
-            map.put("msg","token错误3");
-            map.put("data","");
-            JSONObject jsonp= new JSONObject(map);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
+            map.put("msg", "token错误3");
+            map.put("data", "");
+            JSONObject jsonp = new JSONObject(map);
             return jsonp;
         }
 

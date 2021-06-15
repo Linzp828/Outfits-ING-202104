@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/blog")
 public class GetAllBlogController {
@@ -33,65 +33,72 @@ public class GetAllBlogController {
     static final String serverHead = "http://121.5.100.116/static/headPic/";
 
     @RequestMapping(value = "/getAll", method = RequestMethod.POST)
-    public JSON GetAllBlog(@RequestBody JSONObject request,@RequestHeader(value = "token") String token) {
+    /**
+     * 获取所有博客
+     *
+     * @param request
+     * @param token
+     * @return
+     */
+    public JSON GetAllBlog(@RequestBody JSONObject request, @RequestHeader(value = "token") String token) {
         List<Map<String, Object>> listBlog = new ArrayList<>();
         //String token = request.getString("token");
         try {
 
             Map<String, Object> code = TokenUtil.parseJWT(token);
             List<Blog> blogList = blogDao.blogSearch();
-            for (int j=0;j<blogList.size();j++){
+            for (int j = 0; j < blogList.size(); j++) {
                 Map<String, Object> mapBlog = new HashMap<String, Object>();
-                mapBlog.put("blogId",blogList.get(j).getId());
-                int num = blogDao.userBlogFind(Integer.parseInt(code.get("ID").toString()),blogList.get(j).getId());
-                if(num==1){
-                    mapBlog.put("favorite",1);
-                }else {
-                    mapBlog.put("favorite",0);
+                mapBlog.put("blogId", blogList.get(j).getId());
+                int num = blogDao.userBlogFind(Integer.parseInt(code.get("ID").toString()), blogList.get(j).getId());
+                if (num == 1) {
+                    mapBlog.put("favorite", 1);
+                } else {
+                    mapBlog.put("favorite", 0);
                 }
-                mapBlog.put("blogTitle",blogList.get(j).getBlog_title());
-                mapBlog.put("blogPic",serverBlog+blogList.get(j).getBlog_pic_path());
-                mapBlog.put("blog_released_time",blogList.get(j).getBlog_released_time());
+                mapBlog.put("blogTitle", blogList.get(j).getBlog_title());
+                mapBlog.put("blogPic", serverBlog + blogList.get(j).getBlog_pic_path());
+                mapBlog.put("blog_released_time", blogList.get(j).getBlog_released_time());
                 //System.out.println(mapBlog);
                 //System.out.println("人的id"+blogList.get(j).getUser_id());
-                User user1= userDao.getIntro(blogList.get(j).getUser_id());
-                mapBlog.put("userId",blogList.get(j).getUser_id());
-                mapBlog.put("user_pic",serverHead+user1.getUser_pic_path());
-                mapBlog.put("user_nickname",user1.getUser_nickname());
+                User user1 = userDao.getIntro(blogList.get(j).getUser_id());
+                mapBlog.put("userId", blogList.get(j).getUser_id());
+                mapBlog.put("user_pic", serverHead + user1.getUser_pic_path());
+                mapBlog.put("user_nickname", user1.getUser_nickname());
 
 
-                int t1 = userDao.userIdGetSubscribe(Integer.parseInt(code.get("ID").toString()),blogList.get(j).getUser_id());
-                if(t1==1){
-                    mapBlog.put("user_state",2);
-                }else if (Integer.parseInt(code.get("ID").toString())==blogList.get(j).getUser_id()){
-                    mapBlog.put("user_state",1);
-                }else{
-                    mapBlog.put("user_state",3);
+                int t1 = userDao.userIdGetSubscribe(Integer.parseInt(code.get("ID").toString()), blogList.get(j).getUser_id());
+                if (t1 == 1) {
+                    mapBlog.put("user_state", 2);
+                } else if (Integer.parseInt(code.get("ID").toString()) == blogList.get(j).getUser_id()) {
+                    mapBlog.put("user_state", 1);
+                } else {
+                    mapBlog.put("user_state", 3);
                 }
                 listBlog.add(mapBlog);
             }
-            map.put("code",StateUtil.SC_OK);
-            map.put("msg","操作成功");
-            map.put("data",listBlog);
-            JSONObject jsonp= new JSONObject(map);
+            map.put("code", StateUtil.SC_OK);
+            map.put("msg", "操作成功");
+            map.put("data", listBlog);
+            JSONObject jsonp = new JSONObject(map);
             return jsonp;
-        }catch (ExpiredJwtException e) {
-            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
-            map.put("msg","token错误1");
-            map.put("data",listBlog);
-            JSONObject jsonp= new JSONObject(map);
+        } catch (ExpiredJwtException e) {
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
+            map.put("msg", "token错误1");
+            map.put("data", listBlog);
+            JSONObject jsonp = new JSONObject(map);
             return jsonp;
         } catch (SignatureException e1) {
             map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
-            map.put("msg","token错误2");
-            map.put("data",listBlog);
-            JSONObject jsonp= new JSONObject(map);
+            map.put("msg", "token错误2");
+            map.put("data", listBlog);
+            JSONObject jsonp = new JSONObject(map);
             return jsonp;
         } catch (MalformedJwtException e2) {
-            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
-            map.put("msg","token错误3");
-            map.put("data",listBlog);
-            JSONObject jsonp= new JSONObject(map);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
+            map.put("msg", "token错误3");
+            map.put("data", listBlog);
+            JSONObject jsonp = new JSONObject(map);
             return jsonp;
         }
     }

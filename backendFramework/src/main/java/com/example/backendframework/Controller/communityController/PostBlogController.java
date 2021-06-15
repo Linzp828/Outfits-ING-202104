@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/blog")
 public class PostBlogController {
@@ -21,24 +21,33 @@ public class PostBlogController {
 
     static final String blogPath = "static/blogPic";
 
-    @RequestMapping(value = "/post",method = RequestMethod.POST)
+    /**
+     * 发布博客
+     *
+     * @param file
+     * @param token
+     * @param blogArticle
+     * @param blogTitle
+     * @return
+     */
+    @RequestMapping(value = "/post", method = RequestMethod.POST)
     public JSONObject postBlog(@RequestHeader("token") String token,
                                @RequestParam("blogArticle") String blogArticle,
                                @RequestParam("blogTitle") String blogTitle,
-                               @RequestParam("blogPic") MultipartFile file){
+                               @RequestParam("blogPic") MultipartFile file) {
         int userId = Integer.parseInt(TokenUtil.parseJWT(token).get("ID").toString());     //将token解析为userId
         String blogPicPath = PictureUrlUtil.getFilePath(file);
-        PictureUrlUtil.writePicture(file,blogPath);
+        PictureUrlUtil.writePicture(file, blogPath);
 
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
         String releasedTime = sdf.format(new Date());
 
-        blogDao.postBlog(blogArticle,blogPicPath,blogTitle,releasedTime,userId);
+        blogDao.postBlog(blogArticle, blogPicPath, blogTitle, releasedTime, userId);
         JSONObject response = new JSONObject();
         response.put("code", StateUtil.SC_OK);
-        response.put("msg","操作成功");
-        response.put("data",null);
+        response.put("msg", "操作成功");
+        response.put("data", null);
         return response;
     }
 }
