@@ -17,4 +17,8 @@ public class PathUtil {
     public static String getClothingPath(){
         return serverClothing;
     }
+
+    public static String getFilePath(String path,String fileName){
+        return path + fileName;
+    }
 }

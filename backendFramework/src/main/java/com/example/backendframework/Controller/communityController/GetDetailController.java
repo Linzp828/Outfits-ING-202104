@@ -59,7 +59,7 @@ public class GetDetailController {
             }
             User user1 = userDao.getIntro(list.get(0).getUser_id());
             mapData.put("userId", list.get(0).getUser_id());
-            mapData.put("user_pic", PathUtil.getHeadPath() + user1.getUser_pic_path());
+            mapData.put("user_pic", PathUtil.getFilePath(PathUtil.getHeadPath() ,user1.getUser_pic_path()));
             mapData.put("user_nickname", user1.getUser_nickname());
 
 
@@ -74,7 +74,7 @@ public class GetDetailController {
             mapData.put("blogId", blogId);
             mapData.put("title", list.get(0).getBlog_title());
             mapData.put("article", list.get(0).getBlog_article());
-            mapData.put("picture", PathUtil.getBlogPath() + list.get(0).getBlog_pic_path());
+            mapData.put("picture", PathUtil.getFilePath(PathUtil.getBlogPath() ,list.get(0).getBlog_pic_path()));
             mapData.put("time", list.get(0).getBlog_released_time());
             mapData.put("userId", list.get(0).getUser_id());
             map.put("code", StateUtil.SC_OK);

@@ -62,7 +62,7 @@ public class SearchController {
 
                 User user1 = userDao.getIntro(blogList1.get(i).getUser_id());
                 mapBlog1.put("userId", blogList1.get(i).getUser_id());
-                mapBlog1.put("user_pic", PathUtil.getHeadPath() + user1.getUser_pic_path());
+                mapBlog1.put("user_pic", PathUtil.getFilePath(PathUtil.getHeadPath() ,user1.getUser_pic_path()));
                 mapBlog1.put("user_nickname", user1.getUser_nickname());
 
 
@@ -78,7 +78,7 @@ public class SearchController {
                 mapBlog1.put("blog_released_time", blogList1.get(i).getBlog_released_time());
                 mapBlog1.put("blogId", blogList1.get(i).getId());
                 mapBlog1.put("blogTitle", blogList1.get(i).getBlog_title());
-                mapBlog1.put("blogPic", PathUtil.getBlogPath() + blogList1.get(i).getBlog_pic_path());
+                mapBlog1.put("blogPic", PathUtil.getFilePath(PathUtil.getBlogPath() ,blogList1.get(i).getBlog_pic_path()));
                 mapBlog1.put("userId", blogList1.get(i).getUser_id());
                 listBlog.add(mapBlog1);
             }
@@ -97,7 +97,7 @@ public class SearchController {
 
                 User user1 = userDao.getIntro(blogList2.get(i).getUser_id());
                 mapBlog2.put("userId", blogList2.get(i).getUser_id());
-                mapBlog2.put("user_pic", PathUtil.getHeadPath() + user1.getUser_pic_path());
+                mapBlog2.put("user_pic", PathUtil.getFilePath(PathUtil.getHeadPath() ,user1.getUser_pic_path()));
                 mapBlog2.put("user_nickname", user1.getUser_nickname());
 
 
@@ -113,7 +113,7 @@ public class SearchController {
                 mapBlog2.put("blog_released_time", blogList2.get(i).getBlog_released_time());
                 mapBlog2.put("blogId", blogList2.get(i).getId());
                 mapBlog2.put("blogTitle", blogList2.get(i).getBlog_title());
-                mapBlog2.put("blogPic", PathUtil.getBlogPath() + blogList2.get(i).getBlog_pic_path());
+                mapBlog2.put("blogPic", PathUtil.getFilePath(PathUtil.getBlogPath() ,blogList2.get(i).getBlog_pic_path()));
                 mapBlog2.put("userId", blogList2.get(i).getUser_id());
                 listBlog.add(mapBlog2);
             }
