@@ -47,7 +47,7 @@ public class GetUserBlogController {
                 Map<String, Object> mapBlog = new HashMap<String, Object>();
                 mapBlog.put("blogId", blogList.get(i).getId());
                 mapBlog.put("blogTitle", blogList.get(i).getBlog_title());
-                mapBlog.put("blogPic", PathUtil.getFilePath(PathUtil.getBlogPath() ,blogList.get(i).getBlog_pic_path()));
+                mapBlog.put("blogPic", PathUtil.getBlogPath(blogList.get(i).getBlog_pic_path()));
                 mapBlog.put("userId", blogList.get(i).getUser_id());
                 listBlog.add(mapBlog);
             }

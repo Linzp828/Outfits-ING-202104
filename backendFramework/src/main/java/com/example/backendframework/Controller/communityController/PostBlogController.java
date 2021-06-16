@@ -38,7 +38,7 @@ public class PostBlogController {
                                @RequestParam("blogPic") MultipartFile file) {
         int userId = Integer.parseInt(TokenUtil.parseJWT(token).get("ID").toString());     //将token解析为userId
         String blogPicPath = PictureUrlUtil.getFilePath(file);
-        PictureUrlUtil.writePicture(file, PathUtil.getBlogPath());
+        PictureUrlUtil.writePicture(file, blogPath);
 
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern("yyyy-MM-dd HH:mm:ss");

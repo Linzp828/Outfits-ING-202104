@@ -6,6 +6,7 @@ import com.example.backendframework.Dao.matchDao.MatchDao;
 import com.example.backendframework.Dao.wardrobeDao.WardrobeDao;
 import com.example.backendframework.Model.Clothing;
 import com.example.backendframework.Model.Match;
+import com.example.backendframework.util.PathUtil;
 import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -69,7 +70,7 @@ public class ListMatchController {
             for(Clothing clothing:clothingList){
                 Map<String,Object> clothingMap=new HashMap<String,Object>();
                 clothingMap.put("clothingId",clothing.getId());
-                clothingMap.put("clothingPic",server+clothing.getClothing_pic());
+                clothingMap.put("clothingPic", PathUtil.getClothingPath(clothing.getClothing_pic()));
                 clothingArray.add(clothingMap);
             }
             matchMap.put("clothing",clothingArray);

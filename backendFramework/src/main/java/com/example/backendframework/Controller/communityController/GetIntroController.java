@@ -62,7 +62,7 @@ public class GetIntroController {
                 }
                 mapBlog.put("blogId", list.get(0).getId());
                 mapBlog.put("blogTitle", list.get(0).getBlog_title());
-                mapBlog.put("blogPic", PathUtil.getFilePath(PathUtil.getBlogPath() ,list.get(0).getBlog_pic_path()));
+                mapBlog.put("blogPic", PathUtil.getBlogPath(list.get(0).getBlog_pic_path()));
                 mapBlog.put("userId", list.get(0).getUser_id());
                 listBlog.add(mapBlog);
             }

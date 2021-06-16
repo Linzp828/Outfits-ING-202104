@@ -10,7 +10,6 @@ public class PathUtil {
     public static String getBlogPath(String filePath)
     {
         return serverBlog+filePath;
-
     }
 
     public static String getHeadPath(String filePath){

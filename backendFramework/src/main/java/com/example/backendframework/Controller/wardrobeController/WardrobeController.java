@@ -64,7 +64,7 @@ public class WardrobeController {
                 JSONObject clothingObject = new JSONObject();
                 Clothing clothing = clothingList.get(j);
                 clothingObject.put("clothingId", clothing.getId());
-                clothingObject.put("clothingPic", PathUtil.getClothingPath() + clothing.getClothing_pic());
+                clothingObject.put("clothingPic", PathUtil.getClothingPath(clothing.getClothing_pic()));
                 clothingArray.add(clothingObject);
             }
             subtypeObject.put("clothing", clothingArray);

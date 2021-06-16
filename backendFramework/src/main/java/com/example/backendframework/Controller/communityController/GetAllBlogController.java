@@ -64,7 +64,7 @@ public class GetAllBlogController {
                 //System.out.println("人的id"+blogList.get(j).getUser_id());
                 User user1 = userDao.getIntro(blogList.get(j).getUser_id());
                 mapBlog.put("userId", blogList.get(j).getUser_id());
-                mapBlog.put("user_pic", PathUtil.getFilePath(PathUtil.getHeadPath() ,user1.getUser_pic_path()));
+                mapBlog.put("user_pic", PathUtil.getHeadPath(user1.getUser_pic_path()));
                 mapBlog.put("user_nickname", user1.getUser_nickname());
 
 

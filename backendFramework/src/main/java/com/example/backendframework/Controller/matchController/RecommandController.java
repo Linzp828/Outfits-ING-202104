@@ -5,6 +5,7 @@ import com.example.backendframework.Dao.wardrobeDao.WardrobeDao;
 import com.example.backendframework.Model.Clothing;
 
 import com.example.backendframework.util.ClimateUtil;
+import com.example.backendframework.util.PathUtil;
 import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -75,7 +76,7 @@ public class RecommandController {
             //挑选一件上装
             if(!upFlag && typeId==1){
                 upMap.put("clothingId",clothing.getId());
-                upMap.put("clothingPic",server+clothing.getClothing_pic());
+                upMap.put("clothingPic", PathUtil.getClothingPath(clothing.getClothing_pic()));
                 upMap.put("subtypeName",subtypeName);
                 upMap.put("typeName",wardrobeDao.getTypeName(typeId));
                 data.add(upMap);
@@ -84,7 +85,7 @@ public class RecommandController {
             //挑选一件下装
             if(!downFlag && typeId==2){
                 downMap.put("clothingId",clothing.getId());
-                downMap.put("clothingPic",server+clothing.getClothing_pic());
+                downMap.put("clothingPic",PathUtil.getClothingPath(clothing.getClothing_pic()));
                 downMap.put("subtypeName",subtypeName);
                 downMap.put("typeName",wardrobeDao.getTypeName(typeId));
                 data.add(downMap);
