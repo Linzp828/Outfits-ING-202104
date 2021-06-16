@@ -2,6 +2,7 @@ package com.example.backendframework.Controller.meController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.meDao.ModifyInfoDao;
+import com.example.backendframework.util.PathUtil;
 import com.example.backendframework.util.PictureUrlUtil;
 import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
@@ -32,7 +33,8 @@ public class UploadPicController {
 
         try {
             int userId = Integer.parseInt(TokenUtil.parseJWT(token).get("ID").toString());
-            PictureUrlUtil.writePicture(image,headPath);
+            String imgPath=image.getOriginalFilename();
+            PictureUrlUtil.writePicture(image, PathUtil.getHeadPath(imgPath,userId));
             String headPicPath = PictureUrlUtil.getFilePath(image);
 
             modifyInfoDao.setHeadPic(userId,headPicPath);
