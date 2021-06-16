@@ -30,6 +30,9 @@ public class GetAllBlogController {
     private UserDao userDao;
     Map<String, Object> map = new HashMap<String, Object>();
 
+    static final String serverBlog = "http://121.5.100.116/static/blogPic/";
+    static final String serverHead = "http://121.5.100.116/static/headPic/";
+
     @RequestMapping(value = "/getAll", method = RequestMethod.POST)
     /**
      * 获取所有博客
@@ -54,14 +57,14 @@ public class GetAllBlogController {
                 } else {
                     mapBlog.put("favorite", 0);
                 }
-                User user1 = userDao.getIntro(blogList.get(j).getUser_id());
                 mapBlog.put("blogTitle", blogList.get(j).getBlog_title());
-                mapBlog.put("blogPic", PathUtil.getBlogPath(blogList.get(j).getBlog_pic_path(),blogList.get(j).getUser_id()));
+                mapBlog.put("blogPic", PathUtil.getFilePath(PathUtil.getBlogPath(),blogList.get(j).getBlog_pic_path()));
                 mapBlog.put("blog_released_time", blogList.get(j).getBlog_released_time());
                 //System.out.println(mapBlog);
                 //System.out.println("人的id"+blogList.get(j).getUser_id());
+                User user1 = userDao.getIntro(blogList.get(j).getUser_id());
                 mapBlog.put("userId", blogList.get(j).getUser_id());
-                mapBlog.put("user_pic", PathUtil.getHeadPath(user1.getUser_pic_path(),blogList.get(j).getUser_id()));
+                mapBlog.put("user_pic", PathUtil.getFilePath(PathUtil.getHeadPath() ,user1.getUser_pic_path()));
                 mapBlog.put("user_nickname", user1.getUser_nickname());
 
 
