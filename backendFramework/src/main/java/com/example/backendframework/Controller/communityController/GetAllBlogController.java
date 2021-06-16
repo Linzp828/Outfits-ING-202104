@@ -58,7 +58,7 @@ public class GetAllBlogController {
                     mapBlog.put("favorite", 0);
                 }
                 mapBlog.put("blogTitle", blogList.get(j).getBlog_title());
-                mapBlog.put("blogPic", PathUtil.getFilePath(PathUtil.getBlogPath(),blogList.get(j).getBlog_pic_path()));
+                mapBlog.put("blogPic", PathUtil.getBlogPath(blogList.get(j).getBlog_pic_path()));
                 mapBlog.put("blog_released_time", blogList.get(j).getBlog_released_time());
                 //System.out.println(mapBlog);
                 //System.out.println("人的id"+blogList.get(j).getUser_id());
