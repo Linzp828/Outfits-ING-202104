@@ -5,9 +5,13 @@
 
 from snownlp import SnowNLP
 
-s = SnowNLP('福州市')
-# print(s.pinyin)
-result = ''.join([i for i in s.pinyin])
-# print(type(result))
-# print(result)
-print(result[:-3])
+def transfomer(location):
+    s = SnowNLP(location)
+    result = ''.join([i for i in s.pinyin])
+    return (result[:-3])
+# s = SnowNLP('黑龙江市')
+# # print(s.pinyin)
+# result = ''.join([i for i in s.pinyin])
+# # print(type(result))
+# # print(result)
+# print(result[:-3])
