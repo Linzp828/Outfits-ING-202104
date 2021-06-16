@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Model.Blog;
 import com.example.backendframework.Dao.communityDao.BlogDao;
 import com.example.backendframework.Model.SubscribeUser;
+import com.example.backendframework.util.PathUtil;
 import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -61,7 +62,7 @@ public class GetIntroController {
                 }
                 mapBlog.put("blogId", list.get(0).getId());
                 mapBlog.put("blogTitle", list.get(0).getBlog_title());
-                mapBlog.put("blogPic", serverBlog + list.get(0).getBlog_pic_path());
+                mapBlog.put("blogPic", PathUtil.getBlogPath() + list.get(0).getBlog_pic_path());
                 mapBlog.put("userId", list.get(0).getUser_id());
                 listBlog.add(mapBlog);
             }

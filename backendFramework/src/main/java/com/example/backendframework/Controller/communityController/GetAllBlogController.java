@@ -6,6 +6,7 @@ import com.example.backendframework.Dao.communityDao.BlogDao;
 import com.example.backendframework.Dao.login_registerDao.UserDao;
 import com.example.backendframework.Model.Blog;
 import com.example.backendframework.Model.User;
+import com.example.backendframework.util.PathUtil;
 import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -57,13 +58,13 @@ public class GetAllBlogController {
                     mapBlog.put("favorite", 0);
                 }
                 mapBlog.put("blogTitle", blogList.get(j).getBlog_title());
-                mapBlog.put("blogPic", serverBlog + blogList.get(j).getBlog_pic_path());
+                mapBlog.put("blogPic", PathUtil.getBlogPath() + blogList.get(j).getBlog_pic_path());
                 mapBlog.put("blog_released_time", blogList.get(j).getBlog_released_time());
                 //System.out.println(mapBlog);
                 //System.out.println("人的id"+blogList.get(j).getUser_id());
                 User user1 = userDao.getIntro(blogList.get(j).getUser_id());
                 mapBlog.put("userId", blogList.get(j).getUser_id());
-                mapBlog.put("user_pic", serverHead + user1.getUser_pic_path());
+                mapBlog.put("user_pic", PathUtil.getHeadPath() + user1.getUser_pic_path());
                 mapBlog.put("user_nickname", user1.getUser_nickname());
 
 

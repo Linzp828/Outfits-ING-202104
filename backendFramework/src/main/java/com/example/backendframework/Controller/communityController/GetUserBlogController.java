@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.communityDao.BlogDao;
 import com.example.backendframework.Model.Blog;
+import com.example.backendframework.util.PathUtil;
 import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -46,7 +47,7 @@ public class GetUserBlogController {
                 Map<String, Object> mapBlog = new HashMap<String, Object>();
                 mapBlog.put("blogId", blogList.get(i).getId());
                 mapBlog.put("blogTitle", blogList.get(i).getBlog_title());
-                mapBlog.put("blogPic", serverBlog + blogList.get(i).getBlog_pic_path());
+                mapBlog.put("blogPic", PathUtil.getBlogPath() + blogList.get(i).getBlog_pic_path());
                 mapBlog.put("userId", blogList.get(i).getUser_id());
                 listBlog.add(mapBlog);
             }

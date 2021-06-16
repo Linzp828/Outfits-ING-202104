@@ -2,6 +2,7 @@ package com.example.backendframework.Controller.communityController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.communityDao.BlogDao;
+import com.example.backendframework.util.PathUtil;
 import com.example.backendframework.util.PictureUrlUtil;
 import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
@@ -37,7 +38,7 @@ public class PostBlogController {
                                @RequestParam("blogPic") MultipartFile file) {
         int userId = Integer.parseInt(TokenUtil.parseJWT(token).get("ID").toString());     //将token解析为userId
         String blogPicPath = PictureUrlUtil.getFilePath(file);
-        PictureUrlUtil.writePicture(file, blogPath);
+        PictureUrlUtil.writePicture(file, PathUtil.getBlogPath());
 
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
