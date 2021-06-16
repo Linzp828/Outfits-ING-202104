@@ -204,7 +204,7 @@ public class ClimateUtil {
     }
 
     public static String getLocation(String location){
-        TransUtil.getLocation(location);
+        return TransUtil.getLocation(location);
     }
 
 

@@ -54,11 +54,11 @@ public class RecommandController {
         }
         int userId = Integer.parseInt(code.get("ID").toString());
         int offset = obj.getInteger("offset");
-
+        String location=obj.getString("location");
         List<Map<String,Object>> data=new ArrayList<>();
 
         //根据用户反馈和天气接口的穿衣等级，筛选出符合的衣物类别
-        List<Clothing> clothingList= wardrobeDao.listLevelClothing(userId,ClimateUtil.getLevel()-offset);
+        List<Clothing> clothingList= wardrobeDao.listLevelClothing(userId,ClimateUtil.getLevel(location)-offset);
 //        List<Clothing> clothingList= wardrobeDao.listLevelClothing(userId,3+offset);
         Boolean upFlag,downFlag;
         Map<String,Object> upMap=new HashMap<String,Object>();
