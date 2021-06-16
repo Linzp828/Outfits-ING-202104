@@ -6,6 +6,7 @@ import com.example.backendframework.Dao.matchDao.MatchDao;
 import com.example.backendframework.Dao.wardrobeDao.WardrobeDao;
 import com.example.backendframework.Model.Clothing;
 import com.example.backendframework.Model.Match;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -36,19 +37,19 @@ public class ListMatchController {
         try{
             code = TokenUtil.parseJWT(token);
         }catch(ExpiredJwtException e) {
-            map.put("code",500);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误1");
             map.put("data", "");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }catch (SignatureException e1) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误2");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }catch (MalformedJwtException e2) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误3");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);
@@ -74,7 +75,7 @@ public class ListMatchController {
             matchMap.put("clothing",clothingArray);
             data.add(matchMap);
         }
-        map.put("code",200);
+        map.put("code",StateUtil.SC_OK);
         map.put("msg","查找成功");
         map.put("data",data);
         JSONObject jsonp= new JSONObject(map);

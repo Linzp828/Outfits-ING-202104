@@ -4,6 +4,7 @@ package com.example.backendframework.Controller.meController;
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.meDao.SubscribeDao;
 import com.example.backendframework.Model.User;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +43,7 @@ public class SubscribeController {
                 if(user.getId()==subscribeUserId){
                     isSubscribed = true;
                     subscribeDao.deleteSubscribeUser(userId,subscribeUserId);
-                    response.put("code",200);
+                    response.put("code",StateUtil.SC_OK);
                     response.put("msg","取消关注成功");
                     response.put("data",null);
                     break;
@@ -50,13 +51,13 @@ public class SubscribeController {
             }
             if(!isSubscribed){
                 subscribeDao.addSubscribeUser(userId,subscribeUserId);
-                response.put("code",200);
+                response.put("code",StateUtil.SC_OK);
                 response.put("msg","关注成功");
                 response.put("data",null);
             }
 
         } catch (NumberFormatException e) {
-            response.put("code",500);
+            response.put("code", StateUtil.SC_NOT_ACCEPTABLE);
             response.put("msg","Token错误");
             response.put("data","请重新登录");
         }

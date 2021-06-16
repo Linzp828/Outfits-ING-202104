@@ -4,7 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.communityDao.BlogDao;
 import com.example.backendframework.Model.Blog;
-import com.example.backendframework.Model.SubscribeUser;
+import com.example.backendframework.util.PathUtil;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/user")
 public class GetUserBlogController {
@@ -28,44 +29,51 @@ public class GetUserBlogController {
     static final String serverBlog = "http://121.5.100.116/static/blogPic/";
 
     @RequestMapping(value = "/getBlog", method = RequestMethod.POST)
-    public JSON GetAllBlog(@RequestBody JSONObject request,@RequestHeader(value = "token") String token){
-        List<Map<String,Object>> listBlog = new ArrayList<>();
+    /**
+     * 获取个人发布博客
+     *
+     * @param request
+     * @param token
+     * @return
+     */
+    public JSON GetAllBlog(@RequestBody JSONObject request, @RequestHeader(value = "token") String token) {
+        List<Map<String, Object>> listBlog = new ArrayList<>();
         //String token = request.getString("token");
         int userId = request.getInteger("userId");
         try {
             Map<String, Object> code = TokenUtil.parseJWT(token);
             List<Blog> blogList = blogDao.userFindBlog(userId);
-            for (int i=0;i<blogList.size();i++){
+            for (int i = 0; i < blogList.size(); i++) {
                 Map<String, Object> mapBlog = new HashMap<String, Object>();
-                mapBlog.put("blogId",blogList.get(i).getId());
-                mapBlog.put("blogTitle",blogList.get(i).getBlog_title());
-                mapBlog.put("blogPic",serverBlog+blogList.get(i).getBlog_pic_path());
-                mapBlog.put("userId",blogList.get(i).getUser_id());
+                mapBlog.put("blogId", blogList.get(i).getId());
+                mapBlog.put("blogTitle", blogList.get(i).getBlog_title());
+                mapBlog.put("blogPic", PathUtil.getFilePath(PathUtil.getBlogPath() ,blogList.get(i).getBlog_pic_path()));
+                mapBlog.put("userId", blogList.get(i).getUser_id());
                 listBlog.add(mapBlog);
             }
 
-            map.put("code",200);
-            map.put("msg","操作成功");
-            map.put("data",listBlog);
-            JSONObject jsonp= new JSONObject(map);
+            map.put("code", StateUtil.SC_OK);
+            map.put("msg", "操作成功");
+            map.put("data", listBlog);
+            JSONObject jsonp = new JSONObject(map);
             return jsonp;
-        }catch (ExpiredJwtException e) {
-            map.put("code",500);
-            map.put("msg","token错误1");
-            map.put("data",listBlog);
-            JSONObject jsonp= new JSONObject(map);
+        } catch (ExpiredJwtException e) {
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
+            map.put("msg", "token错误1");
+            map.put("data", listBlog);
+            JSONObject jsonp = new JSONObject(map);
             return jsonp;
         } catch (SignatureException e1) {
-            map.put("code",500);
-            map.put("msg","token错误2");
-            map.put("data",listBlog);
-            JSONObject jsonp= new JSONObject(map);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
+            map.put("msg", "token错误2");
+            map.put("data", listBlog);
+            JSONObject jsonp = new JSONObject(map);
             return jsonp;
         } catch (MalformedJwtException e2) {
-            map.put("code",500);
-            map.put("msg","token错误3");
-            map.put("data",listBlog);
-            JSONObject jsonp= new JSONObject(map);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
+            map.put("msg", "token错误3");
+            map.put("data", listBlog);
+            JSONObject jsonp = new JSONObject(map);
             return jsonp;
         }
     }

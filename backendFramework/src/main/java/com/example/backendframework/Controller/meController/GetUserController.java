@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.login_registerDao.UserDao;
 import com.example.backendframework.Dao.meDao.SubscribeDao;
 import com.example.backendframework.Model.User;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -65,11 +66,11 @@ public class GetUserController {
             mapUser.put("userSex", userInfo.getUser_sex());
             mapUser.put("userProfile", userInfo.getUser_profile());
             response.put("data",mapUser);
-            response.put("code",200);
+            response.put("code", StateUtil.SC_OK);
             response.put("msg","操作成功");
 
         } catch (NumberFormatException e) {
-            response.put("code",500);
+            response.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             response.put("msg","Token错误");
             response.put("data","");
         }

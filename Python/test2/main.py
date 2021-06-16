@@ -1,3 +1,4 @@
+import os
 import sys
 import numpy as np
 import cv2
@@ -26,10 +27,10 @@ class MainWindow():
 
         self.image_out_np = self.mattingFile.image_matting(filePath,10)
 
-        self.showResultImg(self.image_out_np)
+        self.showResultImg(self.image_out_np,filePath)
 
 
-    def showResultImg(self, image_np):
+    def showResultImg(self, image_np, filePath):
         factor = 1
         image_np = cv2.resize(image_np, None, fx=factor,
                               fy=factor, interpolation=cv2.INTER_AREA)
@@ -37,7 +38,14 @@ class MainWindow():
         image = QImage(image_np, image_np.shape[1],
                        image_np.shape[0], QImage.Format_ARGB32)
 
-        cv2.imwrite('result.png', image_np)
+        if os.path.exists(filePath):
+            os.remove(filePath)
+            print('成功删除文件:', filePath)
+        else:
+            print('未找到此文件:', filePath)
+
+        position = os.path.splitext(filePath)
+        cv2.imwrite(position[0]+'.png', image_np)
         matImg = QPixmap(image)
         self.pic.setPixmap(matImg)
         return matImg
@@ -49,6 +57,7 @@ class MainWindow():
 if __name__ == '__main__':
     mainWindow = MainWindow()
     mainWindow.grabcutMatting(sys.argv[1])
+    # mainWindow.grabcutMatting("C:/Users/33722/Desktop/2.png")
 
 
 

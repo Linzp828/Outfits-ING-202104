@@ -3,6 +3,7 @@ package com.example.backendframework.Controller.matchController;
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.matchDao.MatchClothingDao;
 import com.example.backendframework.Dao.matchDao.MatchDao;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -33,19 +34,19 @@ public class DeleteMatchController {
         try{
             code = TokenUtil.parseJWT(token);
         }catch(ExpiredJwtException e) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误1");
             map.put("data", "");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }catch (SignatureException e1) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误2");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }catch (MalformedJwtException e2) {
-            map.put("code",500);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误3");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);
@@ -57,13 +58,13 @@ public class DeleteMatchController {
 //        System.out.println("删除"+Integer.toString(num1)+"搭配");
 //        System.out.println("搭配中包含了"+Integer.toString(num2)+"衣物");
         if(num1 == 1){
-            map.put("code",200);
+            map.put("code",StateUtil.SC_OK);
             map.put("msg","删除成功");
             map.put("data","");
             JSONObject jsonp= new JSONObject(map);
             return jsonp;
         }
-        map.put("code",403);
+        map.put("code",StateUtil.SC_FORBIDDEN);
         map.put("msg","删除失败");
         map.put("data","");
         JSONObject jsonp= new JSONObject(map);

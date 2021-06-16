@@ -7,6 +7,7 @@ import com.example.backendframework.Dao.matchDao.MatchClothingDao;
 import com.example.backendframework.Dao.matchDao.MatchDao;
 import com.example.backendframework.Model.Blog;
 import com.example.backendframework.Model.Match;
+import com.example.backendframework.util.StateUtil;
 import com.example.backendframework.util.TokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -41,28 +42,28 @@ public class AddMatchController {
             int num = matchDao.insertMatch(match);
             int matchId=match.getId();
             //新建搭配成功
-            System.out.println("衣物id数组大小："+clothingIdArray.size());
+//            System.out.println("衣物id数组大小："+clothingIdArray.size());
             if(num == 1 && matchId != -1){
-                System.out.println("进入match——clothing关系建立");
+//                System.out.println("进入match——clothing关系建立");
                 for(int i=0;i<clothingIdArray.size();i++){
                     //忽略
                     int clothingId=Integer.parseInt(clothingIdArray.get(i).toString());
                     System.out.println(clothingId+"  "+matchId);
                     matchClothingDao.insertMatchClothing(clothingId,matchId);
-                    System.out.println("新增搭配-插入成功");
+//                    System.out.println("新增搭配-插入成功");
                 }
             }
 
-            map.put("code",200);
+            map.put("code",StateUtil.SC_OK);
             map.put("msg","操作成功");
         }catch (ExpiredJwtException e) {
-            map.put("code",500);
+            map.put("code", StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误1");
         } catch (SignatureException e1) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误2");
         } catch (MalformedJwtException e2) {
-            map.put("code",500);
+            map.put("code",StateUtil.SC_NOT_ACCEPTABLE);
             map.put("msg","token错误3");
         }finally {
             map.put("data","");
