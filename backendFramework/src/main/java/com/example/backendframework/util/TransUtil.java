@@ -20,11 +20,13 @@ import java.io.InputStreamReader;
  * @data: 2021-06-16 21:35
  **/
 public class TransUtil {
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
+    public static void getLocation(String location) {
         Process proc;
         try {
             String pyAddr = "E:/GitHub Desktop/Outfits-ING-202104/Python/test2/transfomer.py";
-            String[] args1 = new  String[]{"python",pyAddr};
+//            String location = "福州市";
+            String[] args1 = new  String[]{"python",pyAddr,location};
             proc = Runtime.getRuntime().exec(args1);
             //用输入输出流来截取结果
             BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));

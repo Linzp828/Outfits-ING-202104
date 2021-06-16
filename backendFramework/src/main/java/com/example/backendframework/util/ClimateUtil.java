@@ -36,9 +36,9 @@ public class ClimateUtil {
 //    详细信息
 //    private String TIANQI_DAILY_WEATHER_URL = "https://api.seniverse.com/v3/pro/weather/grid/daily.json";
 
-    private static String TIANQI_API_SECRET_KEY = "Svlng2cUFynmssBrm"; //私钥
+    private static String TIANQI_API_SECRET_KEY = "SOwdLCo4er3E60M7D"; //私钥
 
-    private static String TIANQI_API_USER_ID = "PBn6pLH0yUnNSoEP9"; //公钥
+    private static String TIANQI_API_USER_ID = "PGbX7HdzXHYrGvA0K"; //公钥
 
     /**
      * Generate HmacSHA1 signature with given data string and key
@@ -130,22 +130,6 @@ public class ClimateUtil {
         double airTemp = (high + low) / 2;
         int month = 5;
         double latitude = 26.25; //福州
-//        double latitude = 24.15;    //漳州
-//        double latitude = 22.51;    //莆田
-//        double latitude = 24.45;    //厦门
-//        double latitude = 25.67;    //三明
-//        double latitude = 26.65;    //宁德
-//        double latitude = 26.63;    //南平
-//        double latitude = 24.90;    //泉州
-//        double latitude = 39.93;    //北京
-//        double latitude = 30.67;    //上海
-//        double latitude = 30.15;    //成都
-//        double latitude = 29.56;    //杭州
-//        double latitude = 22.53;    //深圳
-//        double latitude = 37.86;    //石家庄
-//        double latitude = 42.41;    //沈阳
-//        double latitude = 31.41;    //南京
-
 
         double sensTemp;
         double radians1 = Math.toRadians( latitude - 23.5);
@@ -195,12 +179,15 @@ public class ClimateUtil {
         return level;
     }
 
-    public static int getLevel(){
+    public static int getLevel(String location){
+//    public static int getLevel(String location){
         ClimateUtil climateUtil =new ClimateUtil();
         int level=0;
+        String l = getLocation(location);
         try {
             String url = climateUtil.generateGetDiaryWeatherURL(
-                    "fuzhou",
+//                    location,
+                    l,
                     "zh-Hans",
                     "c",
                     "1",
@@ -215,4 +202,10 @@ public class ClimateUtil {
             return level;
         }
     }
+
+    public static String getLocation(String location){
+        TransUtil.getLocation(location);
+    }
+
+
 }
