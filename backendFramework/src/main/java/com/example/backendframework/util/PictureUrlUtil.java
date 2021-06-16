@@ -11,10 +11,10 @@ public class PictureUrlUtil {
      * @param file   图片
      * @param fileFolderName  文件夹名称
      */
-    public static void writePicture(MultipartFile file,String filePath){
+    public static void writePicture(MultipartFile file,String fileFolderName){
         try{
-//            String fileName =file.getOriginalFilename();    //获取图片的名称
-            FileOutputStream picOutput = new FileOutputStream(filePath);   //设置文件路径
+            String fileName =file.getOriginalFilename();    //获取图片的名称
+            FileOutputStream picOutput = new FileOutputStream("/outfits/" + fileFolderName + "/" + fileName);   //设置文件路径
             picOutput.write(file.getBytes());   //获取字节流直接写入到磁盘内
             picOutput.close();
         }
