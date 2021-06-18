@@ -31,7 +31,7 @@ public class PathUtil {
     * @params: filePath，userId
     * @return: String
     */
-    public String poccessPath(String filePath,int userId){
+    public static String poccessPath(String filePath,int userId){
         return Integer.toString(userId)+getDate()+filePath;
     }
 }

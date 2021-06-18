@@ -7,10 +7,7 @@ import com.example.backendframework.Model.Clothing;
 import com.example.backendframework.Model.MatchClothing;
 import com.example.backendframework.Model.Subtype;
 import com.example.backendframework.Model.Type;
-import com.example.backendframework.util.PathUtil;
-import com.example.backendframework.util.PictureUrlUtil;
-import com.example.backendframework.util.StateUtil;
-import com.example.backendframework.util.TokenUtil;
+import com.example.backendframework.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -91,10 +88,14 @@ public class WardrobeController {
             int userId = Integer.parseInt(TokenUtil.parseJWT(token).get("ID").toString());     //将token解析为userId
 
             for (int i = 0; i < files.length; i++) {
-                PictureUrlUtil.writePicture(files[i], clothingPath);     //将图片输出到clothingPic文件夹
-                String filePath = PictureUrlUtil.getFilePath(files[i]);
+                String filePath = PathUtil.poccessPath(PictureUrlUtil.getFilePath(files[i]),userId);
+                PictureUrlUtil.writePicture(files[i],filePath,clothingPath);     //将图片输出到clothingPic文件夹
+//                System.out.println("/outfits/" +clothingPath+"/"+filePath);
+                MattingUtil.getImage("/outfits/" +clothingPath+"/"+filePath);
                 int subtypeId = subtypeIdArray.getInteger(i);
                 System.out.println(filePath + "  " + userId + "  " + subtypeId);
+                filePath = filePath.replace(".jpg",".png");
+                System.out.println(filePath);
                 wardrobeDao.importPic(filePath, userId, subtypeId);
             }
         } catch (Exception e) {

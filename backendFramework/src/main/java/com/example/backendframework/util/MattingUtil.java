@@ -24,7 +24,7 @@ public class MattingUtil {
         Process proc;
         try {
             String pyAddr = "/outfits/main.py";
-            String[] args1 = new String[] {"python",pyAddr,imgUrl};
+            String[] args1 = new String[] {"python3",pyAddr,imgUrl};
             proc = Runtime.getRuntime().exec(args1);
             //用输入输出流来截取结果
             BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));

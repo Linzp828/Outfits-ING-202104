@@ -2,9 +2,7 @@ package com.example.backendframework.Controller.meController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.backendframework.Dao.meDao.ModifyInfoDao;
-import com.example.backendframework.util.PictureUrlUtil;
-import com.example.backendframework.util.StateUtil;
-import com.example.backendframework.util.TokenUtil;
+import com.example.backendframework.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,8 +30,9 @@ public class UploadPicController {
 
         try {
             int userId = Integer.parseInt(TokenUtil.parseJWT(token).get("ID").toString());
-            PictureUrlUtil.writePicture(image,headPath);
-            String headPicPath = PictureUrlUtil.getFilePath(image);
+            String headPicPath = PathUtil.poccessPath(PictureUrlUtil.getFilePath(image),userId);
+            System.out.println(headPicPath);
+            PictureUrlUtil.writePicture(image,headPicPath,headPath);
 
             modifyInfoDao.setHeadPic(userId,headPicPath);
             response.put("code",StateUtil.SC_OK);
